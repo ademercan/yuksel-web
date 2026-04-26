@@ -6,10 +6,10 @@ interface FooterProps {
 }
 
 const certifications = [
-  { code: 'AS9100',  sub: { tr: 'Havacılık KYS',     en: 'Aerospace QMS'       } },
-  { code: 'EN9100',  sub: { tr: 'Avrupa Standardı',  en: 'European Standard'   } },
-  { code: 'TÜRKAK',  sub: { tr: 'Akreditasyon',       en: 'Accreditation'       } },
-  { code: 'SSB',     sub: { tr: 'Onaylı Tedarikçi',  en: 'Approved Supplier'   } },
+  { code: 'AS9100 Rev.C',      sub: { tr: 'Havacılık Kalite Yönetim Sistemi', en: 'Aerospace Quality Management'  } },
+  { code: 'NADCAP NDT',        sub: { tr: 'Tahribatsız Muayene',               en: 'Non-Destructive Testing'       } },
+  { code: 'NADCAP Composite',  sub: { tr: 'Kompozit İmalat',                   en: 'Composite Manufacturing'       } },
+  { code: 'ISO 9001:2008',     sub: { tr: 'Kalite Yönetim Sistemi',            en: 'Quality Management System'     } },
 ]
 
 const hizmetLinks = {
