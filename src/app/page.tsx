@@ -7,6 +7,8 @@ import Gorsel from '@/components/ui/Gorsel'
 import { ArrowRight, ChevronDown, Layers, Settings, Cpu, Wrench, Mail } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import ReferansLogoKarti from '@/components/ui/ReferansLogoKarti'
+import { referanslar } from '@/lib/referanslar-data'
 
 /* ══════════════════════════════════════════════════════════════
    1. HERO SECTION
@@ -541,7 +543,85 @@ function HizmetlerSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════
-   4. CTA BANNER
+   4. REFERANSLAR
+══════════════════════════════════════════════════════════════ */
+function ReferanslarSection() {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  return (
+    <section
+      ref={ref}
+      className="py-20 md:py-28"
+      style={{ background: '#070E1A' }}
+      aria-label="Referanslarımız"
+    >
+      <div className="divider-gold" />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12">
+        {/* Başlık */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="mb-12 text-center"
+        >
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+            <span className="text-xs tracking-[0.3em] uppercase"
+              style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}>
+              Referanslarımız
+            </span>
+            <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+          </div>
+          <h2
+            className="font-heading text-4xl md:text-5xl uppercase tracking-wide mb-3"
+            style={{ color: '#F8F9FA', fontFamily: 'var(--font-heading)' }}
+          >
+            Güvenilen <span className="text-gradient-gold">Ortaklarımız</span>
+          </h2>
+          <p className="text-sm leading-relaxed max-w-lg mx-auto"
+            style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
+            Türkiye'nin önde gelen havacılık ve savunma firmalarına hizmet veriyoruz
+          </p>
+        </motion.div>
+
+        {/* Logo Kartları — 2 satır × 6 sütun */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+          {referanslar.map((r, i) => (
+            <motion.div
+              key={r.ad}
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.35, delay: i * 0.05 }}
+            >
+              <ReferansLogoKarti ad={r.ad} sektor={r.sektor} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Alt link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="mt-8 text-center"
+        >
+          <Link
+            href="/referanslar"
+            className="inline-flex items-center gap-2 text-sm transition-colors duration-200"
+            style={{ color: '#1E6BB5', fontFamily: 'var(--font-body)' }}
+          >
+            Tüm Referansları Görüntüle
+            <ArrowRight size={14} />
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ══════════════════════════════════════════════════════════════
+   5. CTA BANNER
 ══════════════════════════════════════════════════════════════ */
 function CtaBanner() {
   const ref = useRef<HTMLDivElement>(null)
@@ -665,6 +745,7 @@ export default function AnaSayfa() {
         <HeroSection />
         <IstatistikBar />
         <HizmetlerSection />
+        <ReferanslarSection />
         <CtaBanner />
       </main>
       <Footer lang="tr" />

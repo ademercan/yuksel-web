@@ -29,8 +29,9 @@ const hizmetLinks = {
 
 const hizliLinks = {
   tr: [
-    { label: 'Hakkımızda', href: '/hakkimizda' },
-    { label: 'Yetenekler', href: '/yetenekler'  },
+    { label: 'Hakkımızda',  href: '/hakkimizda'  },
+    { label: 'Referanslar', href: '/referanslar' },
+    { label: 'Yetenekler',  href: '/yetenekler'  },
     { label: 'Kalite',     href: '/kalite'       },
     { label: 'Projeler',   href: '/projeler'     },
     { label: 'İletişim',   href: '/iletisim'     },

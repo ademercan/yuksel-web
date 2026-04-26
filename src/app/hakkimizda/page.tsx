@@ -76,7 +76,7 @@ function PageHero() {
 /* ─── Hızlı Bilgiler ──────────────────────────────────────────── */
 const hizliBilgiler = [
   { icon: Factory,  deger: '2010',       etiket: 'Kuruluş Yılı',        aciklama: 'Ankara, Türkiye'              },
-  { icon: Users,    deger: '150+',        etiket: 'Uzman Çalışan',        aciklama: 'Mühendis & teknisyen kadrosu' },
+  { icon: Users,    deger: '100+',        etiket: 'Uzman Çalışan',        aciklama: 'Mühendis & teknisyen kadrosu' },
   { icon: TrendingUp, deger: '500+',     etiket: 'Tamamlanan Proje',     aciklama: 'Havacılık & savunma projeleri' },
   { icon: Award,    deger: 'AS9100',      etiket: 'Kalite Sertifikası',   aciklama: 'Havacılık Kalite Yönetim Sistemi' },
 ]
@@ -171,8 +171,8 @@ function SirketHikayesi() {
                 kürleme teknolojilerini kullanarak havacılık sınıfı parçalar üretmektedir.
               </p>
               <p className="leading-relaxed">
-                AS9100 ve EN9100 sertifikalarına sahip kalite yönetim sistemimiz,
-                Türk Silahlı Kuvvetleri ve Savunma Sanayii Başkanlığı onaylı tedarikçi
+                AS9100, NADCAP NDT ve NADCAP Composite akreditasyonlarına sahip kalite yönetim
+                sistemimiz, Türk Silahlı Kuvvetleri ve Savunma Sanayii Başkanlığı onaylı tedarikçi
                 listemizde yer almamızı sağlamaktadır.
               </p>
             </div>
@@ -257,14 +257,12 @@ function SirketHikayesi() {
 
 /* ─── Tarihçe ─────────────────────────────────────────────────── */
 const milestones = [
-  { yil: '2010', baslik: 'Kuruluş',                  aciklama: 'Ankara\'da Yüksel Kompozit Teknolojileri A.Ş. kuruldu. İlk üretim tesisi Başkent OSB\'de faaliyete geçti.' },
-  { yil: '2012', baslik: 'İlk Havacılık Sözleşmesi', aciklama: 'Türk havacılık sanayii için ilk CFRP parça üretim sözleşmesi imzalandı. Kapasite genişletme çalışmaları başladı.' },
-  { yil: '2015', baslik: 'AS9100 Sertifikası',        aciklama: 'Havacılık Kalite Yönetim Sistemi AS9100 sertifikası alındı. Uluslararası pazara açılım için kritik kilometre taşı.' },
-  { yil: '2017', baslik: 'Tesis Genişlemesi',         aciklama: 'Üretim alanı 3.000 m²\'ye çıkarıldı. İkinci autoclave sistemi devreye alındı. Çalışan sayısı 100\'ü aştı.' },
-  { yil: '2019', baslik: 'EN9100 & SSB Onayı',       aciklama: 'Avrupa havacılık standardı EN9100 sertifikası ve Savunma Sanayii Başkanlığı onaylı tedarikçi listesine dahil olundu.' },
-  { yil: '2021', baslik: 'İHA Üretimi',               aciklama: 'İnsansız Hava Aracı yapısal kompozit parça üretimine başlandı. UAV sektörüne yönelik özel üretim hattı kuruldu.' },
-  { yil: '2023', baslik: 'Kapasite Artışı',           aciklama: 'Yıllık üretim kapasitesi 1.000\'in üzerinde parçaya çıkarıldı. 5 eksenli CNC işleme merkezi yatırımı gerçekleştirildi.' },
-  { yil: '2025', baslik: 'Uluslararası Pazara Açılım', aciklama: 'Avrupa ve Orta Doğu pazarlarına ihracat başladı. NADCAP akreditasyon süreci devam etmektedir.' },
+  { yil: '2010', baslik: 'Kuruluş',                  aciklama: 'Ankara\'da Yüksel Kompozit Teknolojileri A.Ş. kuruldu. Başkent OSB Temelli\'de ilk üretim tesisi faaliyete geçti.' },
+  { yil: '2012', baslik: 'İlk Havacılık Sözleşmesi', aciklama: 'Türk havacılık sanayii için ilk CFRP parça üretim sözleşmesi imzalandı.' },
+  { yil: '2015', baslik: 'AS9100 Sertifikası',        aciklama: 'Havacılık Kalite Yönetim Sistemi AS9100 sertifikası alındı.' },
+  { yil: '2017', baslik: 'Tesis Genişlemesi',         aciklama: 'Üretim alanı 3.000 m²\'ye çıkarıldı. İkinci autoclave sistemi devreye alındı.' },
+  { yil: '2019', baslik: 'NADCAP Akreditasyonu',      aciklama: 'NADCAP NDT ve NADCAP Composite akreditasyonları alındı.' },
+  { yil: '2021', baslik: 'İHA Üretimi',               aciklama: 'İnsansız Hava Aracı yapısal kompozit parça üretimine başlandı.' },
 ]
 
 function Tarihce() {
@@ -420,96 +418,6 @@ function MisyonVizyon() {
   )
 }
 
-/* ─── Ekip / Liderlik ─────────────────────────────────────────── */
-const ekip = [
-  { ad: 'Yük. Müh. Ali Yüksel', unvan: 'Genel Müdür',                    dept: 'Yönetim' },
-  { ad: 'Dr. Fatma Kaya',       unvan: 'Ar-Ge & Mühendislik Müdürü',    dept: 'Mühendislik' },
-  { ad: 'Mehmet Demir',         unvan: 'Üretim Müdürü',                   dept: 'Üretim' },
-  { ad: 'Yük. Müh. Selin Ak',  unvan: 'Kalite Güvence Müdürü',          dept: 'Kalite' },
-]
-
-function EkipBolumu() {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  return (
-    <section
-      ref={ref}
-      className="relative py-20 md:py-28 overflow-hidden"
-      style={{ background: 'rgba(13,13,13,0.5)' }}
-    >
-      <Gorsel
-        src="/images/hakkimizda/yonetim.jpg"
-        alt="Yüksel Kompozit Teknolojileri yönetim kadrosu"
-        fill
-        sizes="100vw"
-        className="object-cover"
-        style={{ opacity: 0.08 }}
-      />
-      <div className="absolute inset-0" style={{ background: 'rgba(10,22,40,0.5)' }} />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
-        >
-          <SectionLabel text="Liderlik Ekibi" />
-          <h2
-            className="font-heading text-4xl md:text-5xl uppercase tracking-wide"
-            style={{ color: '#F8F9FA', fontFamily: 'var(--font-heading)' }}
-          >
-            Deneyimli{' '}
-            <span className="text-gradient-gold">Kadromuz</span>
-          </h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-          {ekip.map((kisi, i) => (
-            <motion.div
-              key={kisi.ad}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="p-6 rounded-lg text-center"
-              style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(30,58,95,0.2)' }}
-            >
-              {/* Avatar placeholder */}
-              <div
-                className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center"
-                style={{ background: 'rgba(30,107,181,0.1)', border: '2px solid rgba(30,107,181,0.25)' }}
-              >
-                <Users size={28} style={{ color: '#1E6BB5' }} strokeWidth={1.5} />
-              </div>
-              <h3
-                className="font-body font-semibold text-sm mb-1"
-                style={{ color: '#F8F9FA', fontFamily: 'var(--font-body)' }}
-              >
-                {kisi.ad}
-              </h3>
-              <p
-                className="text-xs mb-2"
-                style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
-              >
-                {kisi.unvan}
-              </p>
-              <span
-                className="text-[10px] tracking-widest uppercase rounded px-2 py-0.5"
-                style={{
-                  color: '#1E6BB5',
-                  border: '1px solid rgba(30,107,181,0.25)',
-                  fontFamily: 'var(--font-mono)',
-                }}
-              >
-                {kisi.dept}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
 
 /* ─── Sayfa ───────────────────────────────────────────────────── */
 export default function HakkimizdaSayfasi() {
@@ -522,7 +430,6 @@ export default function HakkimizdaSayfasi() {
         <SirketHikayesi />
         <Tarihce />
         <MisyonVizyon />
-        <EkipBolumu />
       </main>
       <Footer lang="tr" />
     </>

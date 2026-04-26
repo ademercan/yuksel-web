@@ -40,6 +40,10 @@ const navLinks: NavLink[] = [
     ],
   },
   {
+    label: { tr: 'Referanslar', en: 'References' },
+    href:  { tr: '/referanslar', en: '/en/references' },
+  },
+  {
     label: { tr: 'Yetenekler', en: 'Capabilities' },
     href:  { tr: '/yetenekler', en: '/en/capabilities' },
   },
