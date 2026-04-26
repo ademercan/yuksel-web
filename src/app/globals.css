@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/* ─── Tailwind v4: Marka Tema Değişkenleri ───────────────────── */
+@theme {
+  /* Ana Renkler */
+  --color-primary:            #0A1628;   /* Koyu lacivert */
+  --color-secondary:          #1E3A5F;   /* Orta lacivert  */
+
+  /* Yeni Birincil Aksan: Logo Mavisi */
+  --color-accent:             #1E6BB5;
+  --color-accent-light:       #4A90D9;
+
+  /* Altın: Yalnızca özel başlık vurguları için */
+  --color-accent-gold:        #C8A96E;
+  --color-accent-gold-light:  #E8C98E;
+
+  /* Nötr */
+  --color-brand-white:        #F8F9FA;
+  --color-brand-gray-light:   #E9ECEF;
+  --color-brand-gray:         #6C757D;
+  --color-dark:               #0D0D0D;
+
+  /* Fontlar */
+  --font-heading: var(--font-bebas, 'Barlow Condensed', sans-serif);
+  --font-body:    var(--font-dm-sans, 'Outfit', sans-serif);
+  --font-mono:    var(--font-jetbrains, 'JetBrains Mono', monospace);
+}
+
+/* ─── CSS Değişkenleri (tüm bileşenler için) ─────────────────── */
+:root {
+  --color-primary:            #0A1628;
+  --color-secondary:          #1E3A5F;
+  --color-accent:             #1E6BB5;
+  --color-accent-light:       #4A90D9;
+  --color-accent-gold:        #C8A96E;
+  --color-accent-gold-light:  #E8C98E;
+  --color-white:              #F8F9FA;
+  --color-gray-light:         #E9ECEF;
+  --color-gray:               #6C757D;
+  --color-dark:               #0D0D0D;
+}
+
+/* ─── Base Stiller ───────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+/* Seçim rengi — mavi aksan */
+::selection {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* Scrollbar — mavi aksan */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: var(--color-primary); }
+::-webkit-scrollbar-thumb  { background: var(--color-accent); border-radius: 3px; }
+
+/* ─── Yardımcı Sınıflar ──────────────────────────────────────── */
+
+/* Altın gradient — YALNIZCA ana başlık vurgu kelimeleri için */
+.text-gradient-gold {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent-gold)       0%,
+    var(--color-accent-gold-light) 50%,
+    var(--color-accent-gold)       100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Mavi gradient — genel aksan metin için */
+.text-gradient-accent {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent)       0%,
+    var(--color-accent-light) 50%,
+    var(--color-accent)       100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Bölüm ayırıcı çizgiler — mavi aksan */
+.divider-accent {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+}
+
+/* Geri uyumluluk için eski isim de çalışsın — artık mavi */
+.divider-gold {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+}
+
+/* Cam / blur efekti — mavi tint kenarlık */
+.glass {
+  background: rgba(10, 22, 40, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(30, 107, 181, 0.2);
+}
+
+/* Karbon fiber CSS doku */
+.bg-carbon-pattern {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 3px,
+      rgba(255,255,255,0.03) 3px,
+      rgba(255,255,255,0.03) 6px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 3px,
+      rgba(255,255,255,0.025) 3px,
+      rgba(255,255,255,0.025) 6px
+    );
+}
+
+/* Teknik grid overlay — mavi tint */
+.bg-tech-grid {
+  background-image:
+    linear-gradient(rgba(30,107,181,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,107,181,0.07) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ─── Animasyon: prefers-reduced-motion ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
