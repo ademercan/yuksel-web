@@ -24,7 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 /* ─── Metadata ───────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.yukselkt.com'),
+  metadataBase: new URL('https://www.yukselct.com'),
   title: {
     default: 'Yüksel Kompozit Teknolojileri | Havacılık Kompozit Parça İmalatı',
     template: '%s | Yüksel Kompozit Teknolojileri',
@@ -43,15 +43,15 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'tr_TR',
     alternateLocale: ['en_US'],
-    url: 'https://www.yukselkt.com',
+    url: 'https://www.yukselct.com',
     siteName: 'Yüksel Kompozit Teknolojileri',
   },
   robots: { index: true, follow: true },
   alternates: {
-    canonical: 'https://www.yukselkt.com',
+    canonical: 'https://www.yukselct.com',
     languages: {
-      tr: 'https://www.yukselkt.com',
-      en: 'https://www.yukselkt.com/en',
+      tr: 'https://www.yukselct.com',
+      en: 'https://www.yukselct.com/en',
     },
   },
 }

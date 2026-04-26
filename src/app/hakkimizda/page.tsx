@@ -219,7 +219,7 @@ function SirketHikayesi() {
                     Başkent Organize Sanayi Bölgesi
                   </p>
                   <p className="text-sm" style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
-                    Temelli, Ankara 06980 — Türkiye
+                    Sadi Türk Bulvarı No: 5, Temelli, Ankara 06909 — Türkiye
                   </p>
                 </div>
               </div>

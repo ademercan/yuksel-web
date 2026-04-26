@@ -618,13 +618,13 @@ function CtaBanner() {
             <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
           <a
-            href="tel:+903121234567"
+            href="tel:+903126401045"
             className="flex items-center gap-2 text-sm transition-colors duration-200"
             style={{ color: 'rgba(248,249,250,0.65)', fontFamily: 'var(--font-body)' }}
           >
             ya da arayın:{' '}
             <span style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}>
-              +90 (312) 123 45 67
+              +90 (312) 640 10 45 - 46
             </span>
           </a>
         </motion.div>

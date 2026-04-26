@@ -2,7 +2,7 @@
 
 import { useState, useRef, FormEvent } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle } from 'lucide-react'
+import { MapPin, Phone, Printer, Mail, Clock, Send, CheckCircle2, AlertCircle } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
@@ -18,59 +18,46 @@ function SectionLabel({ text }: { text: string }) {
 
 /* ─── Form Tipi ───────────────────────────────────────────────── */
 interface FormData {
-  ad:       string
-  soyad:    string
-  sirket:   string
-  eposta:   string
-  telefon:  string
-  konu:     string
-  mesaj:    string
+  'ad-soyad': string
+  sirket:     string
+  eposta:     string
+  telefon:    string
+  mesaj:      string
 }
 
 interface FormErrors {
-  ad?:      string
-  soyad?:   string
-  sirket?:  string
-  eposta?:  string
-  mesaj?:   string
+  'ad-soyad'?: string
+  sirket?:     string
+  eposta?:     string
+  mesaj?:      string
 }
 
 /* ─── Form Validasyonu ────────────────────────────────────────── */
 function validate(data: FormData): FormErrors {
   const errors: FormErrors = {}
-  if (!data.ad.trim())     errors.ad      = 'Ad zorunludur.'
-  if (!data.soyad.trim())  errors.soyad   = 'Soyad zorunludur.'
-  if (!data.sirket.trim()) errors.sirket  = 'Şirket adı zorunludur.'
+  if (!data['ad-soyad'].trim()) errors['ad-soyad'] = 'Bu alan zorunludur.'
+  if (!data.sirket.trim())      errors.sirket       = 'Bu alan zorunludur.'
   if (!data.eposta.trim()) {
-    errors.eposta = 'E-posta zorunludur.'
+    errors.eposta = 'Bu alan zorunludur.'
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.eposta)) {
     errors.eposta = 'Geçerli bir e-posta adresi giriniz.'
   }
-  if (!data.mesaj.trim() || data.mesaj.trim().length < 20) {
-    errors.mesaj = 'Mesajınız en az 20 karakter olmalıdır.'
-  }
+  if (!data.mesaj.trim()) errors.mesaj = 'Bu alan zorunludur.'
   return errors
 }
+
+const BOŞ_FORM: FormData = { 'ad-soyad': '', sirket: '', eposta: '', telefon: '', mesaj: '' }
 
 /* ─── İletişim Formu ──────────────────────────────────────────── */
 function IletisimFormu() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
-  const [form, setForm]       = useState<FormData>({ ad: '', soyad: '', sirket: '', eposta: '', telefon: '', konu: '', mesaj: '' })
-  const [errors, setErrors]   = useState<FormErrors>({})
-  const [status, setStatus]   = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const [form, setForm]     = useState<FormData>(BOŞ_FORM)
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
-  const konular = [
-    'Kompozit Parça İmalatı',
-    'Ana Parça Montajı',
-    'Mühendislik & Tasarım',
-    'Takım & Aparat İmalatı',
-    'Kalite & Sertifikasyon',
-    'Diğer',
-  ]
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setForm((prev) => ({ ...prev, [name]: value }))
     if (errors[name as keyof FormErrors]) {
@@ -78,7 +65,7 @@ function IletisimFormu() {
     }
   }
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const validationErrors = validate(form)
     if (Object.keys(validationErrors).length > 0) {
@@ -86,12 +73,28 @@ function IletisimFormu() {
       return
     }
     setStatus('sending')
-    /* Gerçek API entegrasyonu buraya gelecek (Resend / Nodemailer) */
-    await new Promise((r) => setTimeout(r, 1500))
-    setStatus('success')
+    try {
+      const body = new URLSearchParams({
+        'form-name': 'iletisim',
+        ...form,
+      }).toString()
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body,
+      })
+      if (res.ok) {
+        setStatus('success')
+        setForm(BOŞ_FORM)
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
-  const inputStyle = (hasError: boolean) => ({
+  const inputStyle = (hasError: boolean): React.CSSProperties => ({
     width: '100%',
     background: 'rgba(10,22,40,0.6)',
     border: `1px solid ${hasError ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)'}`,
@@ -102,19 +105,19 @@ function IletisimFormu() {
     fontSize: '14px',
     outline: 'none',
     transition: 'border-color 0.2s',
-  } as React.CSSProperties)
+  })
 
-  const labelStyle = {
+  const labelStyle: React.CSSProperties = {
     display: 'block',
     fontSize: '11px',
     fontFamily: 'var(--font-mono)',
     color: 'rgba(108,117,125,0.8)',
-    textTransform: 'uppercase' as const,
+    textTransform: 'uppercase',
     letterSpacing: '0.1em',
     marginBottom: '6px',
   }
 
-  const errStyle = {
+  const errStyle: React.CSSProperties = {
     fontSize: '11px',
     color: 'rgba(239,68,68,0.8)',
     fontFamily: 'var(--font-body)',
@@ -124,29 +127,6 @@ function IletisimFormu() {
     gap: '4px',
   }
 
-  if (status === 'success') {
-    return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="p-10 rounded-xl text-center"
-        style={{ border: '1px solid rgba(30,107,181,0.25)', background: 'rgba(30,58,95,0.3)' }}
-      >
-        <CheckCircle2 size={48} style={{ color: '#1E6BB5', margin: '0 auto 16px' }} />
-        <h3 className="font-heading text-2xl uppercase tracking-wide mb-3"
-          style={{ color: '#F8F9FA', fontFamily: 'var(--font-heading)' }}>
-          Mesajınız Alındı
-        </h3>
-        <p className="text-sm leading-relaxed"
-          style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
-          En kısa sürede, genellikle 24 saat içinde teknik ekibimiz tarafından
-          dönüş yapılacaktır. Teşekkür ederiz.
-        </p>
-      </motion.div>
-    )
-  }
-
   return (
     <motion.div
       ref={ref}
@@ -154,44 +134,59 @@ function IletisimFormu() {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6 }}
     >
-      <form onSubmit={handleSubmit} noValidate>
+      {/* Başarı bildirimi */}
+      {status === 'success' && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-start gap-3 p-4 rounded-lg mb-6"
+          style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)' }}
+        >
+          <CheckCircle2 size={18} style={{ color: '#22c55e', flexShrink: 0, marginTop: '1px' }} />
+          <p style={{ color: '#22c55e', fontFamily: 'var(--font-body)', fontSize: '14px' }}>
+            Mesajınız alındı, 24 saat içinde dönüş yapacağız.
+          </p>
+        </motion.div>
+      )}
+
+      {/* Hata bildirimi */}
+      {status === 'error' && (
+        <div
+          className="flex items-start gap-3 p-4 rounded-lg mb-6"
+          style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)' }}
+        >
+          <AlertCircle size={18} style={{ color: 'rgba(239,68,68,0.9)', flexShrink: 0, marginTop: '1px' }} />
+          <p style={{ color: 'rgba(239,68,68,0.9)', fontFamily: 'var(--font-body)', fontSize: '14px' }}>
+            Bir hata oluştu. Lütfen tekrar deneyiniz veya doğrudan e-posta gönderiniz.
+          </p>
+        </div>
+      )}
+
+      <form
+        name="iletisim"
+        method="POST"
+        data-netlify="true"
+        onSubmit={handleSubmit}
+        noValidate
+      >
+        <input type="hidden" name="form-name" value="iletisim" />
+
         <div className="space-y-5">
-          {/* Ad / Soyad */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label style={labelStyle}>Ad <span style={{ color: '#1E6BB5' }}>*</span></label>
-              <input
-                name="ad"
-                type="text"
-                value={form.ad}
-                onChange={handleChange}
-                placeholder="Adınız"
-                style={inputStyle(!!errors.ad)}
-                autoComplete="given-name"
-              />
-              {errors.ad && (
-                <div style={errStyle}>
-                  <AlertCircle size={11} /> {errors.ad}
-                </div>
-              )}
-            </div>
-            <div>
-              <label style={labelStyle}>Soyad <span style={{ color: '#1E6BB5' }}>*</span></label>
-              <input
-                name="soyad"
-                type="text"
-                value={form.soyad}
-                onChange={handleChange}
-                placeholder="Soyadınız"
-                style={inputStyle(!!errors.soyad)}
-                autoComplete="family-name"
-              />
-              {errors.soyad && (
-                <div style={errStyle}>
-                  <AlertCircle size={11} /> {errors.soyad}
-                </div>
-              )}
-            </div>
+          {/* Ad Soyad */}
+          <div>
+            <label style={labelStyle}>Ad Soyad <span style={{ color: '#1E6BB5' }}>*</span></label>
+            <input
+              name="ad-soyad"
+              type="text"
+              value={form['ad-soyad']}
+              onChange={handleChange}
+              placeholder="Adınız Soyadınız"
+              style={inputStyle(!!errors['ad-soyad'])}
+              autoComplete="name"
+            />
+            {errors['ad-soyad'] && (
+              <div style={errStyle}><AlertCircle size={11} /> {errors['ad-soyad']}</div>
+            )}
           </div>
 
           {/* Şirket */}
@@ -207,9 +202,7 @@ function IletisimFormu() {
               autoComplete="organization"
             />
             {errors.sirket && (
-              <div style={errStyle}>
-                <AlertCircle size={11} /> {errors.sirket}
-              </div>
+              <div style={errStyle}><AlertCircle size={11} /> {errors.sirket}</div>
             )}
           </div>
 
@@ -227,9 +220,7 @@ function IletisimFormu() {
                 autoComplete="email"
               />
               {errors.eposta && (
-                <div style={errStyle}>
-                  <AlertCircle size={11} /> {errors.eposta}
-                </div>
+                <div style={errStyle}><AlertCircle size={11} /> {errors.eposta}</div>
               )}
             </div>
             <div>
@@ -246,27 +237,9 @@ function IletisimFormu() {
             </div>
           </div>
 
-          {/* Konu */}
-          <div>
-            <label style={labelStyle}>Konu</label>
-            <select
-              name="konu"
-              value={form.konu}
-              onChange={handleChange}
-              style={{ ...inputStyle(false), cursor: 'pointer' }}
-            >
-              <option value="" style={{ background: '#0A1628' }}>Konu seçiniz…</option>
-              {konular.map((k) => (
-                <option key={k} value={k} style={{ background: '#0A1628' }}>{k}</option>
-              ))}
-            </select>
-          </div>
-
           {/* Mesaj */}
           <div>
-            <label style={labelStyle}>
-              Mesajınız <span style={{ color: '#1E6BB5' }}>*</span>
-            </label>
+            <label style={labelStyle}>Mesajınız <span style={{ color: '#1E6BB5' }}>*</span></label>
             <textarea
               name="mesaj"
               value={form.mesaj}
@@ -275,16 +248,9 @@ function IletisimFormu() {
               placeholder="Projeniz hakkında detaylı bilgi veriniz…"
               style={{ ...inputStyle(!!errors.mesaj), resize: 'vertical', minHeight: '120px' }}
             />
-            <div className="flex justify-between items-center mt-1">
-              {errors.mesaj ? (
-                <div style={errStyle}>
-                  <AlertCircle size={11} /> {errors.mesaj}
-                </div>
-              ) : <span />}
-              <span style={{ fontSize: '10px', color: 'rgba(108,117,125,0.5)', fontFamily: 'var(--font-mono)' }}>
-                {form.mesaj.length} karakter
-              </span>
-            </div>
+            {errors.mesaj && (
+              <div style={errStyle}><AlertCircle size={11} /> {errors.mesaj}</div>
+            )}
           </div>
 
           {/* Gönder */}
@@ -311,12 +277,6 @@ function IletisimFormu() {
               </>
             )}
           </button>
-
-          {status === 'error' && (
-            <p style={{ color: 'rgba(239,68,68,0.8)', fontFamily: 'var(--font-body)', fontSize: '13px' }}>
-              Bir hata oluştu. Lütfen tekrar deneyiniz veya doğrudan e-posta gönderiniz.
-            </p>
-          )}
         </div>
       </form>
     </motion.div>
@@ -334,7 +294,8 @@ function IletisimBilgileri() {
       baslik: 'Adres',
       satirlar: [
         'Başkent Organize Sanayi Bölgesi',
-        'Temelli, Ankara 06980',
+        'Sadi Türk Bulvarı No: 5',
+        'Temelli, Ankara 06909',
         'Türkiye',
       ],
       link: null,
@@ -342,14 +303,20 @@ function IletisimBilgileri() {
     {
       Icon: Phone,
       baslik: 'Telefon',
-      satirlar: ['+90 (312) 123 45 67', '+90 (312) 123 45 68 (Faks)'],
-      link: 'tel:+903121234567',
+      satirlar: ['+90 312 640 10 45'],
+      link: 'tel:+903126401045',
+    },
+    {
+      Icon: Printer,
+      baslik: 'Faks',
+      satirlar: ['+90 312 640 10 09'],
+      link: null,
     },
     {
       Icon: Mail,
       baslik: 'E-posta',
-      satirlar: ['info@yukselkt.com', 'satis@yukselkt.com'],
-      link: 'mailto:info@yukselkt.com',
+      satirlar: ['info@yukselct.com'],
+      link: 'mailto:info@yukselct.com',
     },
     {
       Icon: Clock,
@@ -527,11 +494,11 @@ export default function IletisimSayfasi() {
               Yurt dışı satış ve ihracat sorguları için:
             </p>
             <a
-              href="mailto:export@yukselkt.com"
+              href="mailto:export@yukselct.com"
               className="font-body font-semibold text-base transition-colors duration-150"
               style={{ color: '#1E6BB5', fontFamily: 'var(--font-body)' }}
             >
-              export@yukselkt.com
+              export@yukselct.com
             </a>
           </div>
         </section>

@@ -1,5 +1,5 @@
 ﻿import Link from 'next/link'
-import { MapPin, Phone, Mail, ExternalLink } from 'lucide-react'
+import { MapPin, Phone, Mail, ExternalLink, Printer } from 'lucide-react'
 
 interface FooterProps {
   lang?: 'tr' | 'en'
@@ -146,28 +146,37 @@ export default function Footer({ lang = 'tr' }: FooterProps) {
                   style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
                 >
                   {lang === 'tr'
-                    ? 'Başkent Organize Sanayi Bölgesi\nTemelli, Ankara 06980\nTÜRKİYE'
-                    : 'Başkent Organized Industrial Zone\nTemelli, Ankara 06980\nTURKEY'}
+                    ? 'Başkent Organize Sanayi Bölgesi\nSadi Türk Bulvarı No: 5\nTemelli, Ankara 06909\nTÜRKİYE'
+                    : 'Başkent Organized Industrial Zone\nSadi Türk Blvd. No: 5\nTemelli, Ankara 06909\nTURKEY'}
                 </address>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={15} style={{ color: '#1E6BB5', flexShrink: 0 }} />
                 <a
-                  href="tel:+903121234567"
+                  href="tel:+903126401045"
                   className="text-sm transition-colors duration-150"
                   style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
                 >
-                  +90 (312) 123 45 67
+                  +90 312 640 10 45
                 </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Printer size={15} style={{ color: '#1E6BB5', flexShrink: 0 }} />
+                <span
+                  className="text-sm"
+                  style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+                >
+                  +90 312 640 10 09
+                </span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={15} style={{ color: '#1E6BB5', flexShrink: 0 }} />
                 <a
-                  href="mailto:info@yukselkt.com"
+                  href="mailto:info@yukselct.com"
                   className="text-sm transition-colors duration-150"
                   style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
                 >
-                  info@yukselkt.com
+                  info@yukselct.com
                 </a>
               </li>
             </ul>
