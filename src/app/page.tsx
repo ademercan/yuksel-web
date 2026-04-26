@@ -640,13 +640,13 @@ function CtaBanner() {
             fontFamily: 'var(--font-mono)',
           }}
         >
-          <span>AS9100 Sertifikalı</span>
+          <span>AS9100 Rev.C</span>
           <span style={{ opacity: 0.3 }}>·</span>
-          <span>EN9100 Uyumlu</span>
+          <span>NADCAP NDT</span>
           <span style={{ opacity: 0.3 }}>·</span>
-          <span>TÜRKAK Akredite</span>
+          <span>NADCAP Composite</span>
           <span style={{ opacity: 0.3 }}>·</span>
-          <span>SSB Onaylı Tedarikçi</span>
+          <span>ISO 9001:2008</span>
         </motion.div>
       </div>
       <div className="divider-gold absolute bottom-0 left-0 right-0" />
