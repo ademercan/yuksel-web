@@ -2,7 +2,7 @@
 
 import { useState, useRef, FormEvent } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { MapPin, Phone, Printer, Mail, Clock, Send, CheckCircle2, AlertCircle } from 'lucide-react'
+import { MapPin, Phone, Printer, Mail, Clock, Send, AlertCircle } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
@@ -46,16 +46,13 @@ function validate(data: FormData): FormErrors {
   return errors
 }
 
-const BOŞ_FORM: FormData = { 'ad-soyad': '', sirket: '', eposta: '', telefon: '', mesaj: '' }
-
 /* ─── İletişim Formu ──────────────────────────────────────────── */
 function IletisimFormu() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
-  const [form, setForm]     = useState<FormData>(BOŞ_FORM)
+  const [form, setForm]     = useState<FormData>({ 'ad-soyad': '', sirket: '', eposta: '', telefon: '', mesaj: '' })
   const [errors, setErrors] = useState<FormErrors>({})
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -65,33 +62,14 @@ function IletisimFormu() {
     }
   }
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const validationErrors = validate(form)
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors)
       return
     }
-    setStatus('sending')
-    try {
-      const body = new URLSearchParams({
-        'form-name': 'iletisim',
-        ...form,
-      }).toString()
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body,
-      })
-      if (res.ok) {
-        setStatus('success')
-        setForm(BOŞ_FORM)
-      } else {
-        setStatus('error')
-      }
-    } catch {
-      setStatus('error')
-    }
+    e.currentTarget.submit()
   }
 
   const inputStyle = (hasError: boolean): React.CSSProperties => ({
@@ -134,42 +112,12 @@ function IletisimFormu() {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6 }}
     >
-      {/* Başarı bildirimi */}
-      {status === 'success' && (
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-start gap-3 p-4 rounded-lg mb-6"
-          style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)' }}
-        >
-          <CheckCircle2 size={18} style={{ color: '#22c55e', flexShrink: 0, marginTop: '1px' }} />
-          <p style={{ color: '#22c55e', fontFamily: 'var(--font-body)', fontSize: '14px' }}>
-            Mesajınız alındı, 24 saat içinde dönüş yapacağız.
-          </p>
-        </motion.div>
-      )}
-
-      {/* Hata bildirimi */}
-      {status === 'error' && (
-        <div
-          className="flex items-start gap-3 p-4 rounded-lg mb-6"
-          style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.25)' }}
-        >
-          <AlertCircle size={18} style={{ color: 'rgba(239,68,68,0.9)', flexShrink: 0, marginTop: '1px' }} />
-          <p style={{ color: 'rgba(239,68,68,0.9)', fontFamily: 'var(--font-body)', fontSize: '14px' }}>
-            Bir hata oluştu. Lütfen tekrar deneyiniz veya doğrudan e-posta gönderiniz.
-          </p>
-        </div>
-      )}
-
       <form
-        name="iletisim"
+        action="mailto:info@yukselct.com"
         method="POST"
-        data-netlify="true"
         onSubmit={handleSubmit}
         noValidate
       >
-        <input type="hidden" name="form-name" value="iletisim" />
 
         <div className="space-y-5">
           {/* Ad Soyad */}
@@ -256,26 +204,16 @@ function IletisimFormu() {
           {/* Gönder */}
           <button
             type="submit"
-            disabled={status === 'sending'}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold rounded transition-all duration-300"
             style={{
-              background: status === 'sending' ? 'rgba(30,107,181,0.5)' : '#1E6BB5',
+              background: '#1E6BB5',
               color: '#0A1628',
               fontFamily: 'var(--font-body)',
-              cursor: status === 'sending' ? 'not-allowed' : 'pointer',
+              cursor: 'pointer',
             }}
           >
-            {status === 'sending' ? (
-              <>
-                <span className="animate-spin inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
-                Gönderiliyor…
-              </>
-            ) : (
-              <>
-                <Send size={16} />
-                Mesajı Gönder
-              </>
-            )}
+            <Send size={16} />
+            Mesajı Gönder
           </button>
         </div>
       </form>
