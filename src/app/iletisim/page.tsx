@@ -331,7 +331,7 @@ function IletisimBilgileri() {
           Temelli / Ankara — Google Maps
         </p>
         <a
-          href="https://maps.google.com/?q=Başkent+Organize+Sanayi+Bölgesi+Temelli+Ankara"
+          href="https://www.google.com/maps/place/Yüksel+Kompozit+Teknolojileri+A.Ş+Maliköy/Temelli/@39.805588,32.3902816,17z/data=!3m1!4b1!4m6!3m5!1s0x14d31dd722327b71:0xa55cd4d8f5095843!8m2!3d39.8055839!4d32.3928565!16s%2Fg%2F12hl7qv0v?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D"
           target="_blank"
           rel="noopener noreferrer"
           className="mt-3 text-xs underline transition-colors duration-150"
