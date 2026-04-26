@@ -216,17 +216,18 @@ function useCountUp(target: number, duration: number, active: boolean) {
 }
 
 interface StatDef {
-  type:    'number' | 'text'
-  value?:  number
-  display?: string
-  suffix?: string
-  label:   string
-  desc:    string
-  dur?:    number
+  type:      'number' | 'text'
+  value?:    number
+  display?:  string
+  suffix?:   string
+  label:     string
+  desc:      string
+  dur?:      number
+  noFormat?: boolean
 }
 
 const stats: StatDef[] = [
-  { type: 'number', value: 2010, suffix: '',   label: 'Kuruluş Yılı',      desc: 'Ankara\'da kurulan köklü tecrübe', dur: 1600 },
+  { type: 'number', value: 2010, suffix: '', noFormat: true, label: 'Kuruluş Yılı', desc: 'Ankara\'da kurulan köklü tecrübe', dur: 1600 },
   { type: 'number', value: 500,  suffix: '+',  label: 'Tamamlanan Proje',  desc: 'Havacılık & savunma projesi',      dur: 2000 },
   { type: 'text',   display: 'AS9100',          label: 'Kalite Sertifikası', desc: 'Havacılık Kalite Yönetim Sistemi'  },
   { type: 'text',   display: 'Ankara',          label: 'Üretim Merkezi',    desc: 'Başkent OSB, Temelli'               },
@@ -234,7 +235,9 @@ const stats: StatDef[] = [
 
 function StatCard({ s, i, active }: { s: StatDef; i: number; active: boolean }) {
   const num = useCountUp(s.type === 'number' ? s.value! : 0, s.dur ?? 2000, s.type === 'number' && active)
-  const disp = s.type === 'number' ? num.toLocaleString('tr-TR') : s.display!
+  const disp = s.type === 'number'
+    ? (s.noFormat ? String(num) : num.toLocaleString('tr-TR'))
+    : s.display!
 
   return (
     <motion.div
