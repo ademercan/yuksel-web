@@ -20,16 +20,21 @@ function SectionLabel({ text }: { text: string }) {
 
 /* ─── Makine Parkı Verileri ───────────────────────────────────── */
 const makineler = [
-  { kategori: 'Kürleme Sistemleri',    makine: 'Autoclave Sistemi',             adet: '2',    kapasite: 'Ø 1,5m × 3m / Ø 2m × 5m',     sicaklik: '260°C / 20 bar' },
-  { kategori: 'Kürleme Sistemleri',    makine: 'Oven (Fırın)',                  adet: '3',    kapasite: '2m × 2m × 3m',                 sicaklik: '200°C' },
-  { kategori: 'İşleme',               makine: '5 Eksenli CNC İşleme Merkezi', adet: '2',    kapasite: '2000 × 1500 × 600 mm',          sicaklik: '—' },
-  { kategori: 'İşleme',               makine: '3 Eksenli CNC Freze',           adet: '3',    kapasite: '3000 × 1500 × 800 mm',          sicaklik: '—' },
-  { kategori: 'Vakum & İnfüzyon',     makine: 'Vakum İnfüzyon Sistemi',        adet: '5+',   kapasite: 'Sınırsız alan',                 sicaklik: 'Oda sıcaklığı' },
-  { kategori: 'Kalite Kontrol',       makine: 'Ultrasonik C-Scan NDT',         adet: '1',    kapasite: '2000 × 1500 mm',                sicaklik: '—' },
-  { kategori: 'Kalite Kontrol',       makine: 'CMM Koordinat Ölçüm',           adet: '1',    kapasite: '1500 × 1000 × 700 mm',          sicaklik: '—' },
-  { kategori: 'Temiz Oda',            makine: 'ISO 7 Temiz Oda',               adet: '1',    kapasite: '500 m²',                        sicaklik: '22°C ±2°C' },
-  { kategori: 'Test',                 makine: 'Mekanik Test Cihazı',           adet: '1',    kapasite: '100 kN',                        sicaklik: '—' },
-  { kategori: 'Depolama',             makine: 'Soğuk Depo (Prepreg)',          adet: '2',    kapasite: '20 m³',                         sicaklik: '-18°C' },
+  { kategori: 'Kürleme Sistemleri',  makine: 'Otoklav Sistemi — ASC',              adet: '1',  kapasite: 'Ø2.5m × 7.0m',           sicaklik: 'ASC marka'                          },
+  { kategori: 'Kürleme Sistemleri',  makine: 'Otoklav Sistemi — Akarmak',          adet: '1',  kapasite: '—',                       sicaklik: 'Akarmak marka'                      },
+  { kategori: 'Kürleme Sistemleri',  makine: 'Oven (Fırın)',                        adet: '1',  kapasite: '2m × 5m × 2m',           sicaklik: '200°C'                              },
+  { kategori: 'İşleme',             makine: '5 Eksenli CNC Router',               adet: '1',  kapasite: '2000 × 1500 × 600 mm',   sicaklik: 'Thermwood M90-105 Multi Purpose'    },
+  { kategori: 'İşleme',             makine: '3 Eksenli CNC Freze — VarolMak',     adet: '1',  kapasite: '—',                       sicaklik: 'VarolMak'                           },
+  { kategori: 'Kesim & Serim',      makine: 'Ply Cutter',                          adet: '1',  kapasite: '—',                       sicaklik: 'Gerber DCS 2600 – 8.3 FT Pivex'    },
+  { kategori: 'Kesim & Serim',      makine: 'Lazer Projektör',                     adet: '1',  kapasite: '—',                       sicaklik: 'Virtek · Dual Head Laser Edge System' },
+  { kategori: 'Vakum & İnfüzyon',   makine: 'Vakum İnfüzyon Sistemi',             adet: '5+', kapasite: 'Sınırsız alan',           sicaklik: 'Oda sıcaklığı'                      },
+  { kategori: 'Kalite Kontrol',     makine: 'Ultrasonik C-Scan NDT',              adet: '1',  kapasite: '2000 × 1500 mm',          sicaklik: 'Midas C-Scan · C-Scan + A-Scan'    },
+  { kategori: 'Kalite Kontrol',     makine: 'CMM Koordinat Ölçüm',               adet: '1',  kapasite: '1500 × 1000 × 700 mm',   sicaklik: '—'                                  },
+  { kategori: 'Test Laboratuvarı',  makine: 'Mekanik Test Cihazı',               adet: '1',  kapasite: '250 kN',                  sicaklik: 'Instron 250 kN · M&P Laboratuvarı' },
+  { kategori: 'Test Laboratuvarı',  makine: 'Termal Analiz — TGA',               adet: '1',  kapasite: '—',                       sicaklik: 'TA Instruments Q50'                 },
+  { kategori: 'Test Laboratuvarı',  makine: 'Termal Analiz — DSC',               adet: '1',  kapasite: '—',                       sicaklik: 'TA Instruments Q20'                 },
+  { kategori: 'Boyama',             makine: 'Boya ve Kurutma Odası',             adet: '1',  kapasite: '6.5m × 9.0m × 3.8m',     sicaklik: 'Durst'                              },
+  { kategori: 'Depolama',           makine: 'Soğuk Depo (Prepreg)',              adet: '2',  kapasite: '20 m³',                   sicaklik: '-18°C'                              },
 ]
 
 /* ─── Teknik Yetkinlikler ─────────────────────────────────────── */
