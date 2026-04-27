@@ -59,9 +59,9 @@ export default function Footer({ lang = 'tr' }: FooterProps) {
           <div>
             <Link href={lang === 'tr' ? '/' : '/en'} className="inline-flex mb-4">
               <img
-                src="/images/logo-icon.png"
+                src="/images/logo.png"
                 alt="Yüksel Kompozit Teknolojileri"
-                style={{ height: '55px', width: 'auto' }}
+                style={{ height: '50px', width: 'auto', filter: 'brightness(0) invert(1)', background: 'transparent' }}
               />
             </Link>
             <p
