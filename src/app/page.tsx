@@ -250,13 +250,13 @@ function StatCard({ s, i, active }: { s: StatDef; i: number; active: boolean }) 
       {i < stats.length - 1 && (
         <div
           className="absolute right-0 top-1/2 -translate-y-1/2 h-12 w-px hidden md:block"
-          style={{ background: 'linear-gradient(to bottom, transparent, #DEE2E6, transparent)' }}
+          style={{ background: 'linear-gradient(to bottom, transparent, rgba(30,107,181,0.3), transparent)' }}
         />
       )}
 
       <span
-        className="font-heading text-5xl sm:text-6xl leading-none mb-2 tabular-nums"
-        style={{ fontFamily: 'var(--font-heading)', color: '#1E3A5F' }}
+        className="font-heading text-5xl sm:text-6xl leading-none mb-2 tabular-nums text-gradient-gold"
+        style={{ fontFamily: 'var(--font-heading)' }}
       >
         {disp}
         {s.type === 'number' && s.suffix && (
@@ -265,13 +265,13 @@ function StatCard({ s, i, active }: { s: StatDef; i: number; active: boolean }) 
       </span>
       <span
         className="text-sm font-semibold uppercase tracking-widest mb-1"
-        style={{ color: '#333333', fontFamily: 'var(--font-body)' }}
+        style={{ color: '#F8F9FA', fontFamily: 'var(--font-body)' }}
       >
         {s.label}
       </span>
       <span
         className="text-xs leading-snug"
-        style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+        style={{ color: 'rgba(108,117,125,0.7)', fontFamily: 'var(--font-body)' }}
       >
         {s.desc}
       </span>
@@ -287,16 +287,18 @@ function IstatistikBar() {
     <section
       ref={ref}
       aria-label="Şirket istatistikleri"
-      className="section-shadow"
-      style={{ background: '#F8F9FA', borderTop: '1px solid #E9ECEF', borderBottom: '1px solid #E9ECEF' }}
+      style={{ borderTop: '1px solid rgba(30,107,181,0.1)', borderBottom: '1px solid rgba(30,107,181,0.1)' }}
     >
+      <div className="divider-gold" />
       <div
         className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+        style={{ background: 'rgba(30,58,95,0.25)' }}
       >
         <div className="grid grid-cols-2 md:grid-cols-4">
           {stats.map((s, i) => <StatCard key={s.label} s={s} i={i} active={inView} />)}
         </div>
       </div>
+      <div className="divider-gold" />
     </section>
   )
 }
@@ -368,10 +370,9 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
         onMouseLeave={() => setHovered(false)}
         className="group flex flex-col h-full rounded-lg overflow-hidden transition-all duration-300"
         style={{
-          border: hovered ? '1px solid rgba(30,107,181,0.4)' : '1px solid #E9ECEF',
-          background: hovered ? '#FFFFFF' : '#F8F9FA',
+          border: hovered ? '1px solid rgba(30,107,181,0.35)' : '1px solid rgba(255,255,255,0.07)',
+          background: hovered ? 'rgba(30,58,95,0.45)' : 'rgba(30,58,95,0.2)',
           position: 'relative',
-          boxShadow: hovered ? '0 4px 20px rgba(30,107,181,0.1)' : '0 1px 4px rgba(0,0,0,0.05)',
         }}
         aria-label={h.baslik}
       >
@@ -385,12 +386,12 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
             className="object-cover transition-transform duration-500"
             style={{
               transform: hovered ? 'scale(1.06)' : 'scale(1)',
-              opacity: hovered ? 0.9 : 0.75,
+              opacity: hovered ? 0.8 : 0.65,
             }}
           />
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(to bottom, transparent 30%, rgba(248,249,250,0.92))' }}
+            style={{ background: 'linear-gradient(to bottom, transparent 30%, rgba(10,22,40,0.95))' }}
           />
         </div>
 
@@ -420,7 +421,7 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
           <h3
             className="font-heading text-xl md:text-2xl uppercase tracking-wide mb-3 transition-colors duration-200"
             style={{
-              color: hovered ? '#1E6BB5' : '#0A1628',
+              color: hovered ? '#1E6BB5' : '#F8F9FA',
               fontFamily: 'var(--font-heading)',
             }}
           >
@@ -430,7 +431,7 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
           {/* Açıklama */}
           <p
             className="text-sm leading-relaxed mb-5 flex-grow"
-            style={{ color: '#555555', fontFamily: 'var(--font-body)' }}
+            style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
           >
             {h.aciklama}
           </p>
@@ -442,9 +443,9 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
                 key={e}
                 className="text-[10px] tracking-wider uppercase rounded px-2.5 py-1"
                 style={{
-                  color: '#1E6BB5',
-                  border: '1px solid rgba(30,107,181,0.25)',
-                  background: 'rgba(30,107,181,0.06)',
+                  color: 'rgba(30,107,181,0.7)',
+                  border: '1px solid rgba(30,107,181,0.15)',
+                  background: 'rgba(30,107,181,0.05)',
                   fontFamily: 'var(--font-mono)',
                 }}
               >
@@ -478,7 +479,7 @@ function HizmetlerSection() {
   const inView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section className="py-20 md:py-28 section-shadow" style={{ background: '#FFFFFF' }} aria-label="Hizmetlerimiz">
+    <section className="py-20 md:py-28" aria-label="Hizmetlerimiz">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div ref={ref} className="mb-12 md:mb-16">
           <motion.div
@@ -501,7 +502,7 @@ function HizmetlerSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-heading text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide max-w-xl"
-            style={{ color: '#0A1628', fontFamily: 'var(--font-heading)' }}
+            style={{ color: '#F8F9FA', fontFamily: 'var(--font-heading)' }}
           >
             Kompozit Üretimde{' '}
             <span className="text-gradient-gold">Tam Hizmet</span>
@@ -512,7 +513,7 @@ function HizmetlerSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-2xl mt-4 leading-relaxed text-base"
-            style={{ color: '#555555', fontFamily: 'var(--font-body)' }}
+            style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
           >
             Tasarımdan üretime, prototipten seri üretim montajına kadar
             havacılık ve savunma sanayiine yönelik eksiksiz kompozit çözümler.
@@ -554,11 +555,12 @@ function ReferanslarSection() {
   return (
     <section
       ref={ref}
-      className="py-20 md:py-28 section-shadow"
-      style={{ background: '#F0F4F8' }}
+      className="py-20 md:py-28"
+      style={{ background: '#070E1A' }}
       aria-label="Referanslarımız"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="divider-gold" />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12">
         {/* Başlık */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -576,12 +578,12 @@ function ReferanslarSection() {
           </div>
           <h2
             className="font-heading text-4xl md:text-5xl uppercase tracking-wide mb-3"
-            style={{ color: '#0A1628', fontFamily: 'var(--font-heading)' }}
+            style={{ color: '#F8F9FA', fontFamily: 'var(--font-heading)' }}
           >
             Güvenilen <span className="text-gradient-gold">Ortaklarımız</span>
           </h2>
           <p className="text-sm leading-relaxed max-w-lg mx-auto"
-            style={{ color: '#555555', fontFamily: 'var(--font-body)' }}>
+            style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
             Türkiye'nin önde gelen havacılık ve savunma firmalarına hizmet veriyoruz
           </p>
         </motion.div>
