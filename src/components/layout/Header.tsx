@@ -105,9 +105,9 @@ export default function Header() {
             aria-label="Yüksel Kompozit Teknolojileri — Ana Sayfa"
           >
             <img
-              src="/images/logo.png"
+              src="/images/logo-icon.png"
               alt="Yüksel Kompozit Teknolojileri"
-              style={{ height: '50px', width: 'auto', filter: 'brightness(0) invert(1)', background: 'transparent' }}
+              style={{ height: '65px', width: 'auto' }}
             />
           </Link>
 
