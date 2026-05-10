@@ -14,6 +14,16 @@ import { referanslar } from '@/lib/referanslar-data'
    1. HERO SECTION
 ══════════════════════════════════════════════════════════════ */
 function HeroSection() {
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    setIsDesktop(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
   const container = {
     hidden: {},
     show: { transition: { staggerChildren: 0.15, delayChildren: 0.3 } },
@@ -34,16 +44,31 @@ function HeroSection() {
     >
       {/* ── Arkaplan ──────────────────────────────────────── */}
       <div className="absolute inset-0" style={{ background: '#0A1628' }}>
-        {/* Hero video — poster fabrika fotoğrafını gösterir video yüklenirken */}
-        <video
-          src="/videos/hero.mp4"
-          poster="/images/hero/fabrika-1.jpg"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        {/* Mobil: poster görsel Ken Burns animasyonuyla (performans) */}
+        {!isDesktop && (
+          <div className="absolute inset-0 overflow-hidden">
+            <Gorsel
+              src="/images/fabrika-kareleri/hero-otoklav-tunel-premium.png"
+              alt="Yüksel Kompozit Teknolojileri üretim tesisi — otoklav tüneli"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover ken-burns-hero"
+            />
+          </div>
+        )}
+        {/* Masaüstü: sinematik fabrika videosu */}
+        {isDesktop && (
+          <video
+            src="/videos/hero-fabrika-cinematic.mp4"
+            poster="/images/fabrika-kareleri/hero-otoklav-tunel-premium.png"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
         {/* Koyu overlay — metnin okunabilirliğini korur */}
         <div className="absolute inset-0" style={{ background: 'rgba(10,22,40,0.62)' }} />
         {/* Karbon fiber doku */}
@@ -315,7 +340,7 @@ const hizmetler = [
       'CFRP ve GFRP malzemeler kullanılarak prepreg, vakum infüzyon ve autoclave kürleme yöntemleriyle havacılık sınıfı kompozit parça üretimi.',
     href: '/hizmetler/kompozit-parca-imalati',
     etiketler: ['CFRP / GFRP', 'Prepreg', 'Autoclave'],
-    img: '/images/hizmetler/otoklav.jpg',
+    img: '/images/fabrika-kareleri/hizmet-kompozit-otoklav-premium.png',
     imgAlt: 'Otoklav kürleme sistemi — kompozit parça üretimi',
   },
   {
@@ -326,8 +351,8 @@ const hizmetler = [
       'Havacılık standartlarında yapısal montaj ve alt-assembly üretimi. Hassas tolerans yönetimi ile seri ve prototip üretim kapasitesi.',
     href: '/hizmetler/ana-parca-montaji',
     etiketler: ['Yapısal Montaj', 'Alt-Assembly', 'Tolerans Yönetimi'],
-    img: '/images/hizmetler/temiz-oda.jpg',
-    imgAlt: 'ISO Class 8 temiz oda üretim ortamı',
+    img: '/images/fabrika-kareleri/hizmet-montaj-temiz-oda-premium.png',
+    imgAlt: 'ISO Class 8 temiz oda montaj ortamı',
   },
   {
     id: 'muhendislik-tasarim',
@@ -337,8 +362,8 @@ const hizmetler = [
       'Kompozit laminat tasarımı, FEM analiz desteği ve hızlı prototipleme. Müşteri ihtiyaçlarına özel mühendislik çözümleri.',
     href: '/hizmetler/muhendislik-tasarim',
     etiketler: ['Laminat Tasarımı', 'FEM Analiz', 'Prototipleme'],
-    img: '/images/hizmetler/lazer-projektor.jpg',
-    imgAlt: 'Lazer projektör ile hassas ply yerleştirme',
+    img: '/images/fabrika-kareleri/hizmet-muhendislik-cmm-premium.png',
+    imgAlt: 'CMM koordinat ölçüm makinesi — hassas kalite kontrol',
   },
   {
     id: 'takim-aparat-imalati',
@@ -348,8 +373,8 @@ const hizmetler = [
       'Üretim süreçlerine özel kompozit kalıp, takım ve kontrol aparatlarının tasarımı ve imalatı. Uzun ömürlü hassas üretim araç-gereci.',
     href: '/hizmetler/takim-aparat-imalati',
     etiketler: ['Kompozit Kalıp', 'Üretim Takımları', 'Kontrol Aparatları'],
-    img: '/images/hizmetler/cnc-makine.jpg',
-    imgAlt: '5 eksenli CNC işleme merkezi',
+    img: '/images/fabrika-kareleri/hizmet-cnc-tezgah-premium.png',
+    imgAlt: '5 eksenli CNC tezgah — hassas aparat imalatı',
   },
 ]
 
@@ -383,10 +408,10 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
             alt={h.imgAlt}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover transition-transform duration-500"
+            className="object-cover ken-burns-card"
             style={{
-              transform: hovered ? 'scale(1.06)' : 'scale(1)',
-              opacity: hovered ? 0.8 : 0.65,
+              opacity: hovered ? 0.85 : 0.65,
+              transition: 'opacity 0.4s ease',
             }}
           />
           <div

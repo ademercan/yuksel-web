@@ -144,6 +144,28 @@ h1, h2, h3, h4, h5, h6 {
   background-size: 80px 80px;
 }
 
+/* ─── Ken Burns Animasyon ────────────────────────────────────── */
+@keyframes ken-burns {
+  0%   { transform: scale(1)    translate(0, 0); }
+  33%  { transform: scale(1.05) translate(-0.6%, -0.4%); }
+  66%  { transform: scale(1.04) translate(0.4%, -0.8%); }
+  100% { transform: scale(1.07) translate(-0.3%, 0.5%); }
+}
+
+/* Hero (mobil poster) — yavaş, sinematik */
+.ken-burns-hero {
+  animation: ken-burns 22s ease-in-out infinite alternate;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+/* Hizmet kartı / fabrika görseli — orta hız */
+.ken-burns-card {
+  animation: ken-burns 13s ease-in-out infinite alternate;
+  will-change: transform;
+  transform-origin: center center;
+}
+
 /* ─── Animasyon: prefers-reduced-motion ──────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

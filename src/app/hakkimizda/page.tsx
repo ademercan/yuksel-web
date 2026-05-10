@@ -189,11 +189,11 @@ function SirketHikayesi() {
             {/* Fabrika iç görünümü */}
             <div className="relative h-56 overflow-hidden">
               <Gorsel
-                src="/images/hakkimizda/fabrika.jpg"
-                alt="Yüksel Kompozit Teknolojileri üretim tesisi iç görünümü"
+                src="/images/fabrika-kareleri/hakkimizda-fabrika-genel-premium.png"
+                alt="Yüksel Kompozit Teknolojileri üretim tesisi — fabrika genel görünüm"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
+                className="object-cover ken-burns-card"
               />
               <div
                 className="absolute inset-0"
