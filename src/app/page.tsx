@@ -1,8 +1,8 @@
-﻿'use client'
+'use client'
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import Gorsel from '@/components/ui/Gorsel'
 import { ArrowRight, ChevronDown, Layers, Settings, Cpu, Wrench, Mail } from 'lucide-react'
 import Header from '@/components/layout/Header'
@@ -44,7 +44,7 @@ function HeroSection() {
     >
       {/* ── Arkaplan ──────────────────────────────────────── */}
       <div className="absolute inset-0" style={{ background: '#0A1628' }}>
-        {/* Mobil: poster görsel Ken Burns animasyonuyla (performans) */}
+        {/* Mobil: poster görsel Ken Burns animasyonuyla */}
         {!isDesktop && (
           <div className="absolute inset-0 overflow-hidden">
             <Gorsel
@@ -69,15 +69,30 @@ function HeroSection() {
             className="absolute inset-0 w-full h-full object-cover"
           />
         )}
-        {/* Koyu overlay — metnin okunabilirliğini korur */}
-        <div className="absolute inset-0" style={{ background: 'rgba(10,22,40,0.62)' }} />
+
+        {/* Ana overlay — sol koyu (yazı), sağ açık (video görünsün) */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to right, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.55) 50%, rgba(10,22,40,0.30) 100%)',
+          }}
+        />
+
+        {/* Alt geçiş gradyanı — güçlü */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to top, rgba(10,22,40,0.90) 0%, transparent 40%)',
+          }}
+        />
+
         {/* Karbon fiber doku */}
         <div className="absolute inset-0 bg-carbon-pattern opacity-30" />
 
         {/* Teknik altın grid */}
         <div className="absolute inset-0 bg-tech-grid" />
 
-        {/* Sol üst altın radyal parıltı */}
+        {/* Sol üst radyal parıltı */}
         <div
           className="absolute -top-40 -left-40 h-[700px] w-[700px] rounded-full"
           style={{ background: 'radial-gradient(circle, rgba(30,107,181,0.08) 0%, transparent 70%)' }}
@@ -88,12 +103,6 @@ function HeroSection() {
           className="absolute -bottom-20 -right-20 h-[500px] w-[500px] rounded-full"
           style={{ background: 'radial-gradient(circle, rgba(30,58,95,0.5) 0%, transparent 70%)' }}
         />
-
-        {/* Alt geçiş gradyanı */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-32"
-          style={{ background: 'linear-gradient(to top, #0A1628, transparent)' }}
-        />
       </div>
 
       {/* ── İçerik ────────────────────────────────────────── */}
@@ -103,16 +112,16 @@ function HeroSection() {
         initial="hidden"
         animate="show"
       >
-        {/* Üst etiket */}
+        {/* Üst etiket — altın */}
         <motion.div variants={fadeIn} className="mb-6 inline-flex items-center gap-3">
-          <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+          <span className="h-px w-8" style={{ background: '#D4A574' }} />
           <span
-            className="text-xs tracking-[0.3em] uppercase"
-            style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}
+            className="text-sm font-semibold tracking-widest uppercase"
+            style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}
           >
             AS9100 SERTİFİKALI · 2010&apos;DAN BERİ
           </span>
-          <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+          <span className="h-px w-8" style={{ background: '#D4A574' }} />
         </motion.div>
 
         {/* Ana Başlık */}
@@ -120,7 +129,11 @@ function HeroSection() {
           variants={fadeUp}
           className="font-heading text-5xl sm:text-7xl md:text-8xl lg:text-[7rem]
                      uppercase leading-none tracking-wide mb-6"
-          style={{ fontFamily: 'var(--font-heading)' }}
+          style={{
+            fontFamily: 'var(--font-heading)',
+            fontWeight: 800,
+            textShadow: '0 4px 32px rgba(0,0,0,0.9)',
+          }}
         >
           <span style={{ color: '#F8F9FA' }}>Havacılık Standartlarında</span>
           <br />
@@ -128,20 +141,37 @@ function HeroSection() {
         </motion.h1>
 
         {/* Alt başlık */}
-        <motion.div variants={fadeUp} className="mx-auto mb-10 max-w-2xl">
+        <motion.div variants={fadeUp} className="mx-auto mb-10 max-w-xl">
           <p
-            className="text-base sm:text-lg leading-relaxed mb-4"
-            style={{ color: 'rgba(248,249,250,0.7)', fontFamily: 'var(--font-body)' }}
+            className="text-base sm:text-lg mb-6"
+            style={{
+              color: '#E2E8F0',
+              fontFamily: 'var(--font-body)',
+              textShadow: '0 2px 16px rgba(0,0,0,0.8)',
+              lineHeight: 1.7,
+            }}
           >
             Havacılık ve savunma sanayii için AS9100 sertifikalı
             yüksek performanslı kompozit parça imalatı.
           </p>
-          <p
-            className="text-xs tracking-widest uppercase"
-            style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}
-          >
-            CFRP · GFRP · PREPREG · AUTOCLAVE
-          </p>
+
+          {/* Teknoloji rozetleri — pill biçiminde */}
+          <div className="flex flex-wrap justify-center gap-2">
+            {['CFRP', 'GFRP', 'PREPREG', 'AUTOCLAVE'].map((tag) => (
+              <span
+                key={tag}
+                className="text-xs font-semibold tracking-wider uppercase rounded-full px-3 py-1"
+                style={{
+                  border: '1px solid rgba(212,165,116,0.4)',
+                  background: 'rgba(10,22,40,0.5)',
+                  color: '#D4A574',
+                  fontFamily: 'var(--font-mono)',
+                }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </motion.div>
 
         {/* Butonlar */}
@@ -149,23 +179,29 @@ function HeroSection() {
           variants={fadeUp}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          {/* Altın buton */}
+          {/* Altın birincil buton */}
           <Link
             href="/hizmetler"
-            className="group inline-flex items-center gap-2 px-7 py-3.5 text-base font-body font-semibold rounded transition-all duration-300"
-            style={{ background: '#1E6BB5', color: '#0A1628', fontFamily: 'var(--font-body)' }}
+            className="group inline-flex items-center gap-2 px-8 py-4 text-base font-body font-semibold rounded-full transition-all duration-300 hover:scale-105"
+            style={{
+              background: '#D4A574',
+              color: '#0A1628',
+              fontFamily: 'var(--font-body)',
+              fontWeight: 700,
+              boxShadow: '0 8px 32px rgba(212,165,116,0.4)',
+            }}
           >
             Hizmetlerimizi Keşfedin
             <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
 
-          {/* Outline buton */}
+          {/* İkincil beyaz outline buton */}
           <Link
             href="/iletisim"
-            className="inline-flex items-center gap-2 px-7 py-3.5 text-base font-body font-semibold rounded transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 text-base font-body font-semibold rounded-full transition-all duration-300 hover:bg-white/10"
             style={{
-              border: '1px solid #1E6BB5',
-              color: '#1E6BB5',
+              border: '2px solid rgba(255,255,255,0.6)',
+              color: '#ffffff',
               fontFamily: 'var(--font-body)',
             }}
           >
@@ -195,16 +231,18 @@ function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll göstergesi */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
+      {/* Scroll göstergesi — tıklanınca hizmetlere scroll */}
+      <motion.button
+        onClick={() => document.getElementById('hizmetler')?.scrollIntoView({ behavior: 'smooth' })}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 cursor-pointer group"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.8 }}
+        aria-label="Aşağı kaydır"
       >
         <span
-          className="text-[10px] tracking-[0.25em] uppercase"
-          style={{ color: 'rgba(108,117,125,0.5)', fontFamily: 'var(--font-body)' }}
+          className="text-xs tracking-[0.25em] uppercase transition-colors duration-200 group-hover:text-white"
+          style={{ color: 'rgba(255,255,255,0.7)', fontFamily: 'var(--font-body)' }}
         >
           Keşfet
         </span>
@@ -212,9 +250,9 @@ function HeroSection() {
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <ChevronDown size={20} style={{ color: 'rgba(30,107,181,0.4)' }} />
+          <ChevronDown size={20} style={{ color: 'rgba(255,255,255,0.7)' }} />
         </motion.div>
-      </motion.div>
+      </motion.button>
     </section>
   )
 }
@@ -252,10 +290,10 @@ interface StatDef {
 }
 
 const stats: StatDef[] = [
-  { type: 'number', value: 2010, suffix: '', noFormat: true, label: 'Kuruluş Yılı', desc: 'Ankara\'da kurulan köklü tecrübe', dur: 1600 },
-  { type: 'number', value: 500,  suffix: '+',  label: 'Tamamlanan Proje',  desc: 'Havacılık & savunma projesi',      dur: 2000 },
-  { type: 'text',   display: 'AS9100',          label: 'Kalite Sertifikası', desc: 'Havacılık Kalite Yönetim Sistemi'  },
-  { type: 'text',   display: 'Ankara',          label: 'Üretim Merkezi',    desc: 'Başkent OSB, Temelli'               },
+  { type: 'text',   display: '2010',          label: 'Kuruluş Yılı',      desc: 'Ankara\'da kurulan köklü tecrübe'   },
+  { type: 'number', value: 500, suffix: '+',   label: 'Tamamlanan Proje',  desc: 'Havacılık & savunma projesi',       dur: 2000 },
+  { type: 'text',   display: 'AS9100',         label: 'Kalite Sertifikası', desc: 'Havacılık Kalite Yönetim Sistemi'  },
+  { type: 'text',   display: 'Ankara',         label: 'Üretim Merkezi',    desc: 'Başkent OSB, Temelli'               },
 ]
 
 function StatCard({ s, i, active }: { s: StatDef; i: number; active: boolean }) {
@@ -285,7 +323,7 @@ function StatCard({ s, i, active }: { s: StatDef; i: number; active: boolean }) 
       >
         {disp}
         {s.type === 'number' && s.suffix && (
-          <span style={{ color: '#1E6BB5' }}>{s.suffix}</span>
+          <span style={{ color: '#D4A574' }}>{s.suffix}</span>
         )}
       </span>
       <span
@@ -395,7 +433,7 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
         onMouseLeave={() => setHovered(false)}
         className="group flex flex-col h-full rounded-lg overflow-hidden transition-all duration-300"
         style={{
-          border: hovered ? '1px solid rgba(30,107,181,0.35)' : '1px solid rgba(255,255,255,0.07)',
+          border: hovered ? '1px solid rgba(212,165,116,0.35)' : '1px solid rgba(255,255,255,0.07)',
           background: hovered ? 'rgba(30,58,95,0.45)' : 'rgba(30,58,95,0.2)',
           position: 'relative',
         }}
@@ -414,17 +452,20 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
               transition: 'opacity 0.4s ease',
             }}
           />
+          {/* Güçlü alt overlay */}
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(to bottom, transparent 30%, rgba(10,22,40,0.95))' }}
+            style={{
+              background: 'linear-gradient(to bottom, transparent 20%, rgba(10,22,40,0.70) 60%, rgba(10,22,40,0.95))',
+            }}
           />
         </div>
 
-        {/* Üst mavi çizgi (hover'da gözükür) */}
+        {/* Üst altın çizgi (hover'da gözükür) */}
         <div
           className="absolute top-0 left-0 right-0 h-0.5 transition-all duration-300"
           style={{
-            background: 'linear-gradient(90deg, transparent, #1E6BB5, transparent)',
+            background: 'linear-gradient(90deg, transparent, #D4A574, transparent)',
             transform: hovered ? 'scaleX(1)' : 'scaleX(0)',
             transformOrigin: 'left',
           }}
@@ -435,18 +476,18 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
           <div
             className="mb-5 w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300"
             style={{
-              border: hovered ? '1px solid rgba(30,107,181,0.45)' : '1px solid rgba(30,107,181,0.2)',
-              background: hovered ? 'rgba(30,107,181,0.15)' : 'rgba(30,107,181,0.05)',
+              border: hovered ? '1px solid rgba(212,165,116,0.45)' : '1px solid rgba(212,165,116,0.2)',
+              background: hovered ? 'rgba(212,165,116,0.15)' : 'rgba(212,165,116,0.05)',
             }}
           >
-            <Icon size={22} style={{ color: '#1E6BB5' }} strokeWidth={1.5} />
+            <Icon size={22} style={{ color: '#D4A574' }} strokeWidth={1.5} />
           </div>
 
           {/* Başlık */}
           <h3
-            className="font-heading text-xl md:text-2xl uppercase tracking-wide mb-3 transition-colors duration-200"
+            className="font-heading text-xl md:text-2xl uppercase tracking-wide mb-3 font-bold transition-colors duration-200"
             style={{
-              color: hovered ? '#1E6BB5' : '#F8F9FA',
+              color: hovered ? '#D4A574' : '#ffffff',
               fontFamily: 'var(--font-heading)',
             }}
           >
@@ -456,21 +497,21 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
           {/* Açıklama */}
           <p
             className="text-sm leading-relaxed mb-5 flex-grow"
-            style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+            style={{ color: '#CBD5E1', fontFamily: 'var(--font-body)' }}
           >
             {h.aciklama}
           </p>
 
-          {/* Etiketler */}
+          {/* Etiketler — altın border */}
           <div className="flex flex-wrap gap-2 mb-5">
             {h.etiketler.map((e) => (
               <span
                 key={e}
                 className="text-[10px] tracking-wider uppercase rounded px-2.5 py-1"
                 style={{
-                  color: 'rgba(30,107,181,0.7)',
-                  border: '1px solid rgba(30,107,181,0.15)',
-                  background: 'rgba(30,107,181,0.05)',
+                  color: '#D4A574',
+                  border: '1px solid rgba(212,165,116,0.4)',
+                  background: 'rgba(10,22,40,0.5)',
                   fontFamily: 'var(--font-mono)',
                 }}
               >
@@ -483,7 +524,7 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
           <div
             className="flex items-center gap-2 text-xs font-semibold transition-colors duration-200"
             style={{
-              color: hovered ? '#1E6BB5' : 'rgba(30,107,181,0.5)',
+              color: hovered ? '#D4A574' : 'rgba(212,165,116,0.5)',
               fontFamily: 'var(--font-body)',
             }}
           >
@@ -504,7 +545,7 @@ function HizmetlerSection() {
   const inView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section className="py-20 md:py-28" aria-label="Hizmetlerimiz">
+    <section id="hizmetler" className="py-20 md:py-28" aria-label="Hizmetlerimiz">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div ref={ref} className="mb-12 md:mb-16">
           <motion.div
@@ -513,10 +554,10 @@ function HizmetlerSection() {
             transition={{ duration: 0.5 }}
             className="flex items-center gap-3 mb-4"
           >
-            <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+            <span className="h-px w-8" style={{ background: '#D4A574' }} />
             <span
               className="text-xs tracking-[0.3em] uppercase"
-              style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}
+              style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}
             >
               Hizmetlerimiz
             </span>
@@ -526,8 +567,8 @@ function HizmetlerSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-heading text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide max-w-xl"
-            style={{ color: '#F8F9FA', fontFamily: 'var(--font-heading)' }}
+            className="font-heading text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide max-w-xl font-bold"
+            style={{ color: '#ffffff', fontFamily: 'var(--font-heading)' }}
           >
             Kompozit Üretimde{' '}
             <span className="text-gradient-gold">Tam Hizmet</span>
@@ -538,7 +579,7 @@ function HizmetlerSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-2xl mt-4 leading-relaxed text-base"
-            style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+            style={{ color: '#E2E8F0', fontFamily: 'var(--font-body)' }}
           >
             Tasarımdan üretime, prototipten seri üretim montajına kadar
             havacılık ve savunma sanayiine yönelik eksiksiz kompozit çözümler.
@@ -558,8 +599,8 @@ function HizmetlerSection() {
         >
           <Link
             href="/hizmetler"
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-body font-semibold rounded transition-all duration-300"
-            style={{ border: '1px solid #1E6BB5', color: '#1E6BB5', fontFamily: 'var(--font-body)' }}
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-body font-semibold rounded-full transition-all duration-300 hover:bg-white/5"
+            style={{ border: '1px solid rgba(212,165,116,0.5)', color: '#D4A574', fontFamily: 'var(--font-body)' }}
           >
             Tüm Hizmetleri Görüntüle
             <ArrowRight size={16} />
@@ -581,7 +622,7 @@ function ReferanslarSection() {
     <section
       ref={ref}
       className="py-20 md:py-28"
-      style={{ background: '#070E1A' }}
+      style={{ background: '#0D1B2E' }}
       aria-label="Referanslarımız"
     >
       <div className="divider-gold" />
@@ -594,22 +635,22 @@ function ReferanslarSection() {
           className="mb-12 text-center"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+            <span className="h-px w-8" style={{ background: '#D4A574' }} />
             <span className="text-xs tracking-[0.3em] uppercase"
-              style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}>
+              style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}>
               Referanslarımız
             </span>
-            <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+            <span className="h-px w-8" style={{ background: '#D4A574' }} />
           </div>
           <h2
-            className="font-heading text-4xl md:text-5xl uppercase tracking-wide mb-3"
-            style={{ color: '#F8F9FA', fontFamily: 'var(--font-heading)' }}
+            className="font-heading text-4xl md:text-5xl uppercase tracking-wide mb-3 font-bold"
+            style={{ color: '#ffffff', fontFamily: 'var(--font-heading)' }}
           >
             Güvenilen <span className="text-gradient-gold">Ortaklarımız</span>
           </h2>
           <p className="text-sm leading-relaxed max-w-lg mx-auto"
-            style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
-            Türkiye'nin önde gelen havacılık ve savunma firmalarına hizmet veriyoruz
+            style={{ color: '#E2E8F0', fontFamily: 'var(--font-body)' }}>
+            Türkiye&apos;nin önde gelen havacılık ve savunma firmalarına hizmet veriyoruz
           </p>
         </motion.div>
 
@@ -636,8 +677,8 @@ function ReferanslarSection() {
         >
           <Link
             href="/referanslar"
-            className="inline-flex items-center gap-2 text-sm transition-colors duration-200"
-            style={{ color: '#1E6BB5', fontFamily: 'var(--font-body)' }}
+            className="inline-flex items-center gap-2 text-sm transition-colors duration-200 hover:text-yellow-300"
+            style={{ color: '#D4A574', fontFamily: 'var(--font-body)' }}
           >
             Tüm Referansları Görüntüle
             <ArrowRight size={14} />
@@ -666,7 +707,7 @@ function CtaBanner() {
         <div className="absolute inset-0 bg-carbon-pattern opacity-20" />
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[600px]"
-          style={{ background: 'radial-gradient(ellipse, rgba(30,107,181,0.06) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(ellipse, rgba(212,165,116,0.05) 0%, transparent 70%)' }}
         />
       </div>
       <div className="divider-gold absolute top-0 left-0 right-0" />
@@ -678,22 +719,22 @@ function CtaBanner() {
           transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-3 mb-6"
         >
-          <span className="h-px w-6" style={{ background: '#1E6BB5' }} />
+          <span className="h-px w-6" style={{ background: '#D4A574' }} />
           <span
             className="text-xs tracking-[0.3em] uppercase"
-            style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}
+            style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}
           >
             Birlikte Üretelim
           </span>
-          <span className="h-px w-6" style={{ background: '#1E6BB5' }} />
+          <span className="h-px w-6" style={{ background: '#D4A574' }} />
         </motion.div>
 
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-heading text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide mb-4"
-          style={{ color: '#F8F9FA', fontFamily: 'var(--font-heading)' }}
+          className="font-heading text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide mb-4 font-bold"
+          style={{ color: '#ffffff', fontFamily: 'var(--font-heading)' }}
         >
           Projeniz İçin{' '}
           <span className="text-gradient-gold">Teklif Alın</span>
@@ -704,7 +745,7 @@ function CtaBanner() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-xl mx-auto mb-10 leading-relaxed"
-          style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+          style={{ color: '#E2E8F0', fontFamily: 'var(--font-body)' }}
         >
           Havacılık ve savunma projeleriniz için AS9100 kalite güvencesiyle
           üretim çözümleri sunuyoruz. Teknik ekibimiz 24 saat içinde yanıt verir.
@@ -718,8 +759,14 @@ function CtaBanner() {
         >
           <Link
             href="/iletisim"
-            className="group inline-flex items-center gap-2 px-8 py-4 text-base font-body font-semibold rounded transition-all duration-300"
-            style={{ background: '#1E6BB5', color: '#0A1628', fontFamily: 'var(--font-body)' }}
+            className="group inline-flex items-center gap-2 px-8 py-4 text-base font-body font-semibold rounded-full transition-all duration-300 hover:scale-105"
+            style={{
+              background: '#D4A574',
+              color: '#0A1628',
+              fontFamily: 'var(--font-body)',
+              fontWeight: 700,
+              boxShadow: '0 8px 32px rgba(212,165,116,0.4)',
+            }}
           >
             <Mail size={18} />
             Teklif Formu Doldur
@@ -731,7 +778,7 @@ function CtaBanner() {
             style={{ color: 'rgba(248,249,250,0.65)', fontFamily: 'var(--font-body)' }}
           >
             ya da arayın:{' '}
-            <span style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}>
+            <span style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}>
               +90 (312) 640 10 45 - 46
             </span>
           </a>
