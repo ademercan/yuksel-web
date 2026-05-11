@@ -9,9 +9,9 @@ import Footer from '@/components/layout/Footer'
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-3 mb-4">
-      <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+      <span className="h-px w-8" style={{ background: '#D4A574' }} />
       <span className="text-xs tracking-[0.3em] uppercase"
-        style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}>{text}</span>
+        style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}>{text}</span>
     </div>
   )
 }
@@ -204,12 +204,14 @@ function IletisimFormu() {
           {/* Gönder */}
           <button
             type="submit"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold rounded transition-all duration-300"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold rounded-full transition-all duration-300 hover:scale-105"
             style={{
-              background: '#1E6BB5',
+              background: '#D4A574',
               color: '#0A1628',
               fontFamily: 'var(--font-body)',
+              fontWeight: 700,
               cursor: 'pointer',
+              boxShadow: '0 8px 24px rgba(212,165,116,0.3)',
             }}
           >
             <Send size={16} />
@@ -318,28 +320,32 @@ function IletisimBilgileri() {
         )
       })}
 
-      {/* Harita Placeholder */}
+      {/* Google Maps Embed */}
       <div
-        className="rounded-lg overflow-hidden flex flex-col items-center justify-center h-52"
-        style={{ border: '1px solid rgba(30,107,181,0.12)', background: 'rgba(10,22,40,0.6)' }}
+        className="rounded-lg overflow-hidden"
+        style={{ border: '1px solid rgba(212,165,116,0.15)', height: '220px' }}
       >
-        <MapPin size={32} style={{ color: 'rgba(30,107,181,0.4)', marginBottom: '8px' }} />
-        <p className="text-sm mb-1" style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
-          Başkent Organize Sanayi Bölgesi
-        </p>
-        <p className="text-xs" style={{ color: 'rgba(108,117,125,0.6)', fontFamily: 'var(--font-mono)' }}>
-          Temelli / Ankara — Google Maps
-        </p>
-        <a
-          href="https://www.google.com/maps/place/Yüksel+Kompozit+Teknolojileri+A.Ş+Maliköy/Temelli/@39.805588,32.3902816,17z/data=!3m1!4b1!4m6!3m5!1s0x14d31dd722327b71:0xa55cd4d8f5095843!8m2!3d39.8055839!4d32.3928565!16s%2Fg%2F12hl7qv0v?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 text-xs underline transition-colors duration-150"
-          style={{ color: '#1E6BB5', fontFamily: 'var(--font-body)' }}
-        >
-          Haritada Göster →
-        </a>
+        <iframe
+          title="Yüksel Kompozit Teknolojileri Konum"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.3!2d32.39285649999999!3d39.8055839!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d31dd722327b71%3A0xa55cd4d8f5095843!2sY%C3%BCksel%20Kompozit%20Teknolojileri!5e0!3m2!1str!2str!4v1713787200000!5m2!1str!2str"
+          width="100%"
+          height="100%"
+          style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
       </div>
+      <a
+        href="https://www.google.com/maps/place/Yüksel+Kompozit+Teknolojileri+A.Ş+Maliköy/Temelli/@39.805588,32.3902816,17z"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 text-xs transition-colors duration-150 mt-1"
+        style={{ color: '#D4A574', fontFamily: 'var(--font-body)' }}
+      >
+        <MapPin size={11} />
+        Büyük haritada görüntüle →
+      </a>
     </motion.div>
   )
 }
@@ -356,7 +362,7 @@ export default function IletisimSayfasi() {
         {/* Hero */}
         <section
           className="relative pt-36 pb-20 overflow-hidden"
-          style={{ background: '#0A1628' }}
+          style={{ background: 'linear-gradient(135deg, #0A1628 0%, #0D1B2E 50%, #0A1628 100%)' }}
         >
           <div className="absolute inset-0 bg-carbon-pattern opacity-30" />
           <div className="absolute inset-0 bg-tech-grid" />
@@ -378,7 +384,7 @@ export default function IletisimSayfasi() {
               </h1>
               <p
                 className="max-w-2xl text-base sm:text-lg leading-relaxed"
-                style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+                style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
               >
                 Projeniz için teklif almak veya teknik sorularınız için
                 formu doldurun. Teknik ekibimiz 24 saat içinde yanıt verir.

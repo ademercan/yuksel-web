@@ -11,9 +11,9 @@ import Footer from '@/components/layout/Footer'
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-3 mb-4">
-      <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+      <span className="h-px w-8" style={{ background: '#D4A574' }} />
       <span className="text-xs tracking-[0.3em] uppercase"
-        style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}>
+        style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}>
         {text}
       </span>
     </div>
@@ -25,7 +25,9 @@ function PageHero() {
   return (
     <section
       className="relative pt-36 pb-24 overflow-hidden"
-      style={{ background: '#0A1628' }}
+      style={{
+        background: 'linear-gradient(135deg, #0A1628 0%, #0D1B2E 50%, #0A1628 100%)',
+      }}
       aria-label="Hakkımızda başlık"
     >
       {/* Tesis dış cephe fotoğrafı */}
@@ -52,7 +54,7 @@ function PageHero() {
           <SectionLabel text="Hakkımızda" />
           <h1
             className="font-heading text-5xl sm:text-7xl md:text-8xl uppercase leading-none tracking-wide mb-6"
-            style={{ color: '#F8F9FA', fontFamily: 'var(--font-heading)' }}
+            style={{ color: '#ffffff', fontFamily: 'var(--font-heading)' }}
           >
             Kompozit{' '}
             <span className="text-gradient-gold">Üretimde</span>
@@ -61,13 +63,49 @@ function PageHero() {
           </h1>
           <p
             className="max-w-2xl text-base sm:text-lg leading-relaxed"
-            style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+            style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
           >
             2010 yılında Ankara'da kurulan Yüksel Kompozit Teknolojileri A.Ş.,
-            AS9100 sertifikalı üretim altyapısıyla Türkiye'nin havacılık ve
+            AS9100 sertifikalı üretim altyapısıyla Türkiye&apos;nin havacılık ve
             savunma sanayiinin önde gelen kompozit parça üreticilerinden biridir.
           </p>
         </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ─── Tam Genişlik Fabrika Görseli ────────────────────────────── */
+function FabrikaGorselBant() {
+  return (
+    <section
+      className="relative w-full overflow-hidden"
+      style={{ height: '500px' }}
+      aria-label="Fabrika genel görünümü"
+    >
+      <Gorsel
+        src="/images/fabrika-kareleri/hakkimizda-fabrika-genel-premium.png"
+        alt="Yüksel Kompozit Teknolojileri — fabrika genel görünümü"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+      {/* Gradient overlay */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(10,22,40,0.60) 0%, transparent 30%, transparent 60%, rgba(10,22,40,0.85) 100%)',
+        }}
+      />
+      {/* Konum etiketi */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 px-5 py-2.5 rounded-full"
+        style={{ background: 'rgba(10,22,40,0.75)', border: '1px solid rgba(212,165,116,0.3)', backdropFilter: 'blur(8px)' }}>
+        <MapPin size={14} style={{ color: '#D4A574' }} />
+        <span className="text-sm font-semibold tracking-wide"
+          style={{ color: '#D4A574', fontFamily: 'var(--font-body)' }}>
+          Başkent OSB, Temelli / Ankara
+        </span>
       </div>
     </section>
   )
@@ -158,7 +196,7 @@ function SirketHikayesi() {
               <br />
               Sanayii İçin
             </h2>
-            <div className="space-y-4" style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
+            <div className="space-y-4" style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}>
               <p className="leading-relaxed">
                 Yüksel Kompozit Teknolojileri A.Ş., 2010 yılında Ankara'da havacılık
                 ve savunma sektörüne yüksek kaliteli kompozit parça tedariki amacıyla
@@ -218,7 +256,7 @@ function SirketHikayesi() {
                   >
                     Başkent Organize Sanayi Bölgesi
                   </p>
-                  <p className="text-sm" style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
+                  <p className="text-sm" style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}>
                     Sadi Türk Bulvarı No: 5, Temelli, Ankara 06909 — Türkiye
                   </p>
                 </div>
@@ -240,7 +278,7 @@ function SirketHikayesi() {
                     </span>
                     <span
                       className="text-[10px] uppercase tracking-wider"
-                      style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+                      style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
                     >
                       {item.label}
                     </span>
@@ -332,7 +370,7 @@ function Tarihce() {
                     </h3>
                     <p
                       className="text-sm leading-relaxed"
-                      style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+                      style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
                     >
                       {m.aciklama}
                     </p>
@@ -405,7 +443,7 @@ function MisyonVizyon() {
                 </h3>
                 <p
                   className="leading-relaxed"
-                  style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+                  style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
                 >
                   {item.icerik}
                 </p>
@@ -426,6 +464,7 @@ export default function HakkimizdaSayfasi() {
       <Header />
       <main>
         <PageHero />
+        <FabrikaGorselBant />
         <HizliBilgiler />
         <SirketHikayesi />
         <Tarihce />

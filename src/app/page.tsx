@@ -60,14 +60,15 @@ function HeroSection() {
         {/* Masaüstü: sinematik fabrika videosu */}
         {isDesktop && (
           <video
-            src="/videos/hero-fabrika-cinematic.mp4"
             poster="/images/fabrika-kareleri/hero-otoklav-tunel-premium.png"
             autoPlay
             muted
             loop
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-          />
+          >
+            <source src="/videos/hero-fabrika-cinematic.mp4" type="video/mp4" />
+          </video>
         )}
 
         {/* Ana overlay — sol koyu (yazı), sağ açık (video görünsün) */}
@@ -296,17 +297,20 @@ const stats: StatDef[] = [
   { type: 'text',   display: 'Ankara',         label: 'Üretim Merkezi',    desc: 'Başkent OSB, Temelli'               },
 ]
 
-function StatCard({ s, i, active }: { s: StatDef; i: number; active: boolean }) {
-  const num = useCountUp(s.type === 'number' ? s.value! : 0, s.dur ?? 2000, s.type === 'number' && active)
+function StatCard({ s, i }: { s: StatDef; i: number }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, amount: 0.3 })
+  const num = useCountUp(s.type === 'number' ? s.value! : 0, s.dur ?? 2000, s.type === 'number' && inView)
   const disp = s.type === 'number'
     ? (s.noFormat ? String(num) : num.toLocaleString('tr-TR'))
     : s.display!
 
   return (
     <motion.div
+      ref={ref}
       className="relative flex flex-col items-center text-center px-6 py-8"
       initial={{ opacity: 0, y: 20 }}
-      animate={active ? { opacity: 1, y: 0 } : {}}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.55, delay: i * 0.1 }}
     >
       {/* Dikey ayırıcı */}
@@ -343,12 +347,8 @@ function StatCard({ s, i, active }: { s: StatDef; i: number; active: boolean }) 
 }
 
 function IstatistikBar() {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
   return (
     <section
-      ref={ref}
       aria-label="Şirket istatistikleri"
       style={{ borderTop: '1px solid rgba(30,107,181,0.1)', borderBottom: '1px solid rgba(30,107,181,0.1)' }}
     >
@@ -358,7 +358,7 @@ function IstatistikBar() {
         style={{ background: 'rgba(30,58,95,0.25)' }}
       >
         <div className="grid grid-cols-2 md:grid-cols-4">
-          {stats.map((s, i) => <StatCard key={s.label} s={s} i={i} active={inView} />)}
+          {stats.map((s, i) => <StatCard key={s.label} s={s} i={i} />)}
         </div>
       </div>
       <div className="divider-gold" />

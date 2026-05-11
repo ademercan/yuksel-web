@@ -22,17 +22,19 @@ function ReferansDetayKarti({ r, i }: { r: typeof referanslar[0]; i: number }) {
       className="group rounded-lg overflow-hidden transition-all duration-300 cursor-default"
       style={{
         background: '#0D1B2E',
-        border: '1px solid #1E6BB5',
+        border: '1px solid rgba(255,255,255,0.1)',
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLElement
-        el.style.border = '1px solid #C8A96E'
-        el.style.boxShadow = '0 0 24px rgba(200,169,110,0.12)'
+        el.style.border = '1px solid rgba(212,165,116,0.4)'
+        el.style.boxShadow = '0 8px 32px rgba(212,165,116,0.08)'
+        el.style.transform = 'translateY(-2px)'
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget as HTMLElement
-        el.style.border = '1px solid #1E6BB5'
+        el.style.border = '1px solid rgba(255,255,255,0.1)'
         el.style.boxShadow = 'none'
+        el.style.transform = 'none'
       }}
     >
       {/* Üst alan — firma adı */}
@@ -55,10 +57,10 @@ function ReferansDetayKarti({ r, i }: { r: typeof referanslar[0]; i: number }) {
         <span
           className="mt-2 uppercase tracking-widest"
           style={{
-            color: '#1E6BB5',
+            color: '#D4A574',
             fontFamily: 'var(--font-mono)',
             fontSize: '10px',
-            border: '1px solid rgba(30,107,181,0.3)',
+            border: '1px solid rgba(212,165,116,0.35)',
             padding: '2px 8px',
             borderRadius: '3px',
           }}
@@ -74,9 +76,9 @@ function ReferansDetayKarti({ r, i }: { r: typeof referanslar[0]; i: number }) {
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-3 mb-4">
-      <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+      <span className="h-px w-8" style={{ background: '#D4A574' }} />
       <span className="text-xs tracking-[0.3em] uppercase"
-        style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}>
+        style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}>
         {text}
       </span>
     </div>
@@ -87,7 +89,7 @@ function PageHero() {
   return (
     <section
       className="relative pt-36 pb-20 overflow-hidden"
-      style={{ background: '#0A1628' }}
+      style={{ background: 'linear-gradient(135deg, #0A1628 0%, #0D1B2E 50%, #0A1628 100%)' }}
       aria-label="Referanslar başlık"
     >
       <div className="absolute inset-0 bg-carbon-pattern opacity-20" />
@@ -113,9 +115,9 @@ function PageHero() {
           </h1>
           <p
             className="max-w-xl text-base leading-relaxed"
-            style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+            style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
           >
-            Türkiye'nin önde gelen havacılık ve savunma firmalarına yıllardır
+            Türkiye&apos;nin önde gelen havacılık ve savunma firmalarına yıllardır
             AS9100 kalite güvencesiyle hizmet veriyoruz.
           </p>
         </motion.div>
