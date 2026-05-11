@@ -11,9 +11,9 @@ import EkipmanKarti from '@/components/ui/EkipmanKarti'
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-3 mb-4">
-      <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+      <span className="h-px w-8" style={{ background: '#D4A574' }} />
       <span className="text-xs tracking-[0.3em] uppercase"
-        style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}>{text}</span>
+        style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}>{text}</span>
     </div>
   )
 }
@@ -149,8 +149,8 @@ function YetkinliklerGrid() {
                 <ul className="space-y-2">
                   {y.items.map((item) => (
                     <li key={item} className="flex items-start gap-2">
-                      <CheckCircle2 size={13} style={{ color: '#1E6BB5', marginTop: '3px', flexShrink: 0 }} />
-                      <span className="text-sm" style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
+                      <CheckCircle2 size={13} style={{ color: '#D4A574', marginTop: '3px', flexShrink: 0 }} />
+                      <span className="text-sm" style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}>
                         {item}
                       </span>
                     </li>
@@ -236,11 +236,11 @@ function MakineParkiTablosu() {
                     {m.adet}
                   </td>
                   <td className="px-5 py-3.5"
-                    style={{ color: '#6C757D', fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
+                    style={{ color: '#D1D5DB', fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
                     {m.kapasite}
                   </td>
                   <td className="px-5 py-3.5"
-                    style={{ color: '#6C757D', fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
+                    style={{ color: '#D1D5DB', fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
                     {m.sicaklik}
                   </td>
                 </tr>
@@ -327,8 +327,8 @@ function StandartlarBolumu() {
             <div className="space-y-2.5">
               {standartlar.map((s) => (
                 <div key={s} className="flex items-start gap-3">
-                  <CheckCircle2 size={15} style={{ color: '#1E6BB5', marginTop: '2px', flexShrink: 0 }} />
-                  <span className="text-sm" style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
+                  <CheckCircle2 size={15} style={{ color: '#D4A574', marginTop: '2px', flexShrink: 0 }} />
+                  <span className="text-sm" style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}>
                     {s}
                   </span>
                 </div>
@@ -361,7 +361,7 @@ function StandartlarBolumu() {
                   {item.val}
                 </span>
                 <span className="text-xs uppercase tracking-wide"
-                  style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
+                  style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}>
                   {item.label}
                 </span>
               </div>
@@ -384,7 +384,7 @@ export default function YeteneklerSayfasi() {
         {/* Hero */}
         <section
           className="relative pt-36 pb-24 overflow-hidden"
-          style={{ background: '#0A1628' }}
+          style={{ background: 'linear-gradient(135deg, #0A1628 0%, #0D1B2E 50%, #0A1628 100%)' }}
         >
           <div className="absolute inset-0 bg-carbon-pattern opacity-30" />
           <div className="absolute inset-0 bg-tech-grid" />
@@ -406,7 +406,7 @@ export default function YeteneklerSayfasi() {
               </h1>
               <p
                 className="max-w-2xl text-base sm:text-lg leading-relaxed"
-                style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+                style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
               >
                 Modern makine parkı, AS9100 sertifikalı süreçler ve deneyimli
                 kadromuzla havacılık ve savunma sanayiinin en zorlu gereksinimlerini karşılıyoruz.
@@ -432,8 +432,8 @@ export default function YeteneklerSayfasi() {
             </p>
             <Link
               href="/iletisim"
-              className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold rounded"
-              style={{ background: '#1E6BB5', color: '#0A1628', fontFamily: 'var(--font-body)' }}
+              className="inline-flex items-center gap-2 px-8 py-4 text-base font-semibold rounded-full transition-all duration-300 hover:scale-105"
+              style={{ background: '#D4A574', color: '#0A1628', fontFamily: 'var(--font-body)', fontWeight: 700, boxShadow: '0 8px 24px rgba(212,165,116,0.3)' }}
             >
               Teklif İste <ArrowRight size={18} />
             </Link>

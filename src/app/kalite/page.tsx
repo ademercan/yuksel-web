@@ -11,9 +11,9 @@ import EkipmanKarti from '@/components/ui/EkipmanKarti'
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-3 mb-4">
-      <span className="h-px w-8" style={{ background: '#1E6BB5' }} />
+      <span className="h-px w-8" style={{ background: '#D4A574' }} />
       <span className="text-xs tracking-[0.3em] uppercase"
-        style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}>{text}</span>
+        style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}>{text}</span>
     </div>
   )
 }
@@ -124,7 +124,7 @@ function SertifikalarBolumu() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="rounded-xl overflow-hidden flex flex-col"
               style={{
-                border: `1px solid ${s.durum === 'Aktif' ? 'rgba(30,107,181,0.25)' : 'rgba(30,107,181,0.1)'}`,
+                border: `1px solid ${s.durum === 'Aktif' ? 'rgba(212,165,116,0.3)' : 'rgba(212,165,116,0.1)'}`,
                 background: 'rgba(30,58,95,0.2)',
               }}
             >
@@ -150,7 +150,7 @@ function SertifikalarBolumu() {
                 {'not' in s && s.not ? (
                   <span
                     className="mt-2 text-[10px]"
-                    style={{ color: '#6C757D', fontFamily: 'var(--font-mono)', fontStyle: 'italic' }}
+                    style={{ color: '#D1D5DB', fontFamily: 'var(--font-mono)', fontStyle: 'italic' }}
                   >
                     {s.not}
                   </span>
@@ -177,7 +177,7 @@ function SertifikalarBolumu() {
                 </h3>
                 <p
                   className="text-xs leading-relaxed mb-4 flex-grow"
-                  style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+                  style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
                 >
                   {s.aciklama}
                 </p>
@@ -252,7 +252,7 @@ function KaliteSurecleriBolumu() {
                 </div>
                 <p
                   className="text-sm leading-relaxed mb-4"
-                  style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+                  style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
                 >
                   {s.aciklama}
                 </p>
@@ -308,9 +308,9 @@ function KaliteTaahhut() {
             <ul className="space-y-3">
               {maddeler.map((m) => (
                 <li key={m} className="flex items-start gap-3">
-                  <CheckCircle2 size={16} style={{ color: '#1E6BB5', marginTop: '2px', flexShrink: 0 }} />
+                  <CheckCircle2 size={16} style={{ color: '#D4A574', marginTop: '2px', flexShrink: 0 }} />
                   <span className="text-sm leading-relaxed"
-                    style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
+                    style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}>
                     {m}
                   </span>
                 </li>
@@ -332,15 +332,15 @@ function KaliteTaahhut() {
               &ldquo;Kalite bir departman değil,{' '}
               <span className="text-gradient-gold">bir kültürdür.&rdquo;</span>
             </blockquote>
-            <p className="text-sm mb-6" style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}>
+            <p className="text-sm mb-6" style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}>
               Yüksel Kompozit olarak kaliteyi, son kontrol noktasında değil; tasarım aşamasından
               teslimata kadar sürecin her adımında yaşatıyoruz.
             </p>
             <div style={{ borderTop: '1px solid rgba(30,107,181,0.15)', paddingTop: '20px' }}>
               <Link
                 href="/iletisim"
-                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded"
-                style={{ background: '#1E6BB5', color: '#0A1628', fontFamily: 'var(--font-body)' }}
+                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-full transition-all duration-300 hover:scale-105"
+                style={{ background: '#D4A574', color: '#0A1628', fontFamily: 'var(--font-body)', fontWeight: 700, boxShadow: '0 8px 24px rgba(212,165,116,0.3)' }}
               >
                 Kalite Dokümanı İste <ArrowRight size={16} />
               </Link>
@@ -409,7 +409,7 @@ export default function KaliteSayfasi() {
         {/* Hero */}
         <section
           className="relative pt-36 pb-24 overflow-hidden"
-          style={{ background: '#0A1628' }}
+          style={{ background: 'linear-gradient(135deg, #0A1628 0%, #0D1B2E 50%, #0A1628 100%)' }}
         >
           <div className="absolute inset-0 bg-carbon-pattern opacity-30" />
           <div className="absolute inset-0 bg-tech-grid" />
@@ -433,7 +433,7 @@ export default function KaliteSayfasi() {
               </h1>
               <p
                 className="max-w-2xl text-base sm:text-lg leading-relaxed"
-                style={{ color: '#6C757D', fontFamily: 'var(--font-body)' }}
+                style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
               >
                 Havacılık ve savunma sanayiinin en yüksek kalite standartlarını
                 karşılayan sertifikalı üretim süreçleri ve kalite yönetim sistemi.

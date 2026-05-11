@@ -38,6 +38,12 @@
   --color-gray-light:         #E9ECEF;
   --color-gray:               #6C757D;
   --color-dark:               #0D0D0D;
+
+  /* Global Tasarım Sistemi */
+  --color-navy:               #0A1628;
+  --color-gold:               #D4A574;
+  --color-text:               #E2E8F0;
+  --color-text-soft:          #94A3B8;
 }
 
 /* ─── Base Stiller ───────────────────────────────────────────── */
