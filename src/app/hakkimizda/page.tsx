@@ -1,168 +1,135 @@
-﻿'use client'
+'use client'
 
 import { useRef } from 'react'
+import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import Gorsel from '@/components/ui/Gorsel'
 import { MapPin, Users, Award, Factory, Target, Eye, TrendingUp } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
-/* ─── Yardımcı: Bölüm Etiketi ────────────────────────────────── */
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="flex items-center gap-3 mb-4">
       <span className="h-px w-8" style={{ background: '#D4A574' }} />
-      <span className="text-xs tracking-[0.3em] uppercase"
-        style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}>
+      <span
+        className="text-xs tracking-[0.3em] uppercase"
+        style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}
+      >
         {text}
       </span>
     </div>
   )
 }
 
-/* ─── Sayfa Hero ──────────────────────────────────────────────── */
+/* ─── Hero ────────────────────────────────────────────────────── */
 function PageHero() {
   return (
     <section
-      className="relative pt-36 pb-24 overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #0A1628 0%, #0D1B2E 50%, #0A1628 100%)',
-      }}
+      className="relative w-full h-[70vh] min-h-[500px] overflow-hidden"
       aria-label="Hakkımızda başlık"
-    >
-      {/* Tesis dış cephe fotoğrafı */}
-      <Gorsel
-        src="/images/hakkimizda/bina.jpg"
-        alt="Yüksel Kompozit Teknolojileri üretim tesisi dış görünümü"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover"
-        style={{ opacity: 0.22 }}
-      />
-      <div className="absolute inset-0" style={{ background: 'rgba(10,22,40,0.72)' }} />
-      <div className="absolute inset-0 bg-carbon-pattern opacity-20" />
-      <div className="absolute inset-0 bg-tech-grid" />
-      <div className="divider-gold absolute bottom-0 left-0 right-0" />
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-        >
-          <SectionLabel text="Hakkımızda" />
-          <h1
-            className="font-heading text-5xl sm:text-7xl md:text-8xl uppercase leading-none tracking-wide mb-6"
-            style={{ color: '#ffffff', fontFamily: 'var(--font-heading)' }}
-          >
-            Kompozit{' '}
-            <span className="text-gradient-gold">Üretimde</span>
-            <br />
-            15 Yıl
-          </h1>
-          <p
-            className="max-w-2xl text-base sm:text-lg leading-relaxed"
-            style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
-          >
-            2010 yılında Ankara'da kurulan Yüksel Kompozit Teknolojileri A.Ş.,
-            AS9100 sertifikalı üretim altyapısıyla Türkiye&apos;nin havacılık ve
-            savunma sanayiinin önde gelen kompozit parça üreticilerinden biridir.
-          </p>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-/* ─── Tam Genişlik Fabrika Görseli ────────────────────────────── */
-function FabrikaGorselBant() {
-  return (
-    <section
-      className="relative w-full overflow-hidden"
-      style={{ height: '500px' }}
-      aria-label="Fabrika genel görünümü"
     >
       <Gorsel
         src="/images/fabrika-kareleri/hakkimizda-fabrika-genel-premium.png"
-        alt="Yüksel Kompozit Teknolojileri — fabrika genel görünümü"
+        alt="Yüksel Kompozit Teknolojileri üretim tesisi"
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        className="object-cover object-center"
       />
-      {/* Gradient overlay */}
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(to bottom, rgba(10,22,40,0.60) 0%, transparent 30%, transparent 60%, rgba(10,22,40,0.85) 100%)',
+          background:
+            'linear-gradient(to bottom, rgba(10,22,40,0.80) 0%, rgba(10,22,40,0.40) 50%, rgba(10,22,40,0.70) 100%)',
         }}
       />
-      {/* Konum etiketi */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 px-5 py-2.5 rounded-full"
-        style={{ background: 'rgba(10,22,40,0.75)', border: '1px solid rgba(212,165,116,0.3)', backdropFilter: 'blur(8px)' }}>
-        <MapPin size={14} style={{ color: '#D4A574' }} />
-        <span className="text-sm font-semibold tracking-wide"
-          style={{ color: '#D4A574', fontFamily: 'var(--font-body)' }}>
-          Başkent OSB, Temelli / Ankara
-        </span>
+      <div className="relative h-full flex flex-col justify-end pb-16">
+        <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <SectionLabel text="Hakkımızda" />
+            <h1
+              className="font-heading text-5xl sm:text-7xl md:text-8xl uppercase leading-none tracking-wide mb-6"
+              style={{ color: '#ffffff', fontFamily: 'var(--font-heading)' }}
+            >
+              Kompozit{' '}
+              <span className="text-gradient-gold">Üretimde</span>
+              <br />
+              15 Yıl
+            </h1>
+            <p
+              className="max-w-2xl text-base sm:text-lg leading-relaxed"
+              style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
+            >
+              2010 yılında Ankara&apos;da kurulan Yüksel Kompozit Teknolojileri A.Ş.,
+              AS9100 sertifikalı üretim altyapısıyla Türkiye&apos;nin havacılık ve
+              savunma sanayiinin önde gelen kompozit parça üreticilerinden biridir.
+            </p>
+          </motion.div>
+        </div>
       </div>
     </section>
   )
 }
 
-/* ─── Hızlı Bilgiler ──────────────────────────────────────────── */
-const hizliBilgiler = [
-  { icon: Factory,  deger: '2010',       etiket: 'Kuruluş Yılı',        aciklama: 'Ankara, Türkiye'              },
-  { icon: Users,    deger: '100+',        etiket: 'Uzman Çalışan',        aciklama: 'Mühendis & teknisyen kadrosu' },
-  { icon: TrendingUp, deger: '500+',     etiket: 'Tamamlanan Proje',     aciklama: 'Havacılık & savunma projeleri' },
-  { icon: Award,    deger: 'AS9100',      etiket: 'Kalite Sertifikası',   aciklama: 'Havacılık Kalite Yönetim Sistemi' },
+/* ─── İstatistik Bar ──────────────────────────────────────────── */
+const istatistikler = [
+  { icon: Factory,    deger: '2010',   etiket: 'Kuruluş Yılı',       aciklama: 'Ankara, Türkiye'                  },
+  { icon: Users,      deger: '100+',   etiket: 'Uzman Çalışan',       aciklama: 'Mühendis & teknisyen kadrosu'     },
+  { icon: TrendingUp, deger: '500+',   etiket: 'Tamamlanan Proje',    aciklama: 'Havacılık & savunma projeleri'    },
+  { icon: Award,      deger: 'AS9100', etiket: 'Kalite Sertifikası',  aciklama: 'Havacılık Kalite Yönetim Sistemi' },
 ]
 
-function HizliBilgiler() {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
+function IstatistikBar() {
   return (
-    <section ref={ref} className="py-16" style={{ background: 'rgba(30,58,95,0.25)' }}>
+    <section
+      style={{
+        background: 'rgba(10,22,40,0.97)',
+        borderTop: '1px solid rgba(212,165,116,0.3)',
+        borderBottom: '1px solid rgba(212,165,116,0.1)',
+      }}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {hizliBilgiler.map((b, i) => {
-            const Icon = b.icon
+        <div className="grid grid-cols-2 lg:grid-cols-4">
+          {istatistikler.map((item, i) => {
+            const Icon = item.icon
             return (
-              <motion.div
-                key={b.etiket}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="flex flex-col items-center text-center p-6 rounded-lg"
-                style={{ border: '1px solid rgba(30,107,181,0.15)', background: 'rgba(10,22,40,0.5)' }}
+              <div
+                key={item.etiket}
+                className="flex flex-col items-center text-center py-8 px-4"
+                style={{
+                  borderRight:
+                    i === 0 || i === 2
+                      ? '1px solid rgba(212,165,116,0.12)'
+                      : i === 1
+                      ? '1px solid rgba(212,165,116,0.12)'
+                      : 'none',
+                }}
               >
-                <div
-                  className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
-                  style={{ background: 'rgba(30,107,181,0.1)', border: '1px solid rgba(30,107,181,0.25)' }}
-                >
-                  <Icon size={22} style={{ color: '#1E6BB5' }} strokeWidth={1.5} />
-                </div>
+                <Icon size={20} style={{ color: 'rgba(212,165,116,0.5)', marginBottom: '8px' }} strokeWidth={1.5} />
                 <span
-                  className="font-heading text-4xl leading-none mb-1 text-gradient-gold"
-                  style={{ fontFamily: 'var(--font-heading)' }}
+                  className="font-heading text-4xl leading-none mb-1"
+                  style={{ color: '#D4A574', fontFamily: 'var(--font-heading)' }}
                 >
-                  {b.deger}
+                  {item.deger}
                 </span>
                 <span
                   className="text-xs font-semibold uppercase tracking-widest mb-1"
                   style={{ color: '#F8F9FA', fontFamily: 'var(--font-body)' }}
                 >
-                  {b.etiket}
+                  {item.etiket}
                 </span>
                 <span
                   className="text-xs leading-snug"
-                  style={{ color: 'rgba(108,117,125,0.7)', fontFamily: 'var(--font-body)' }}
+                  style={{ color: '#94A3B8', fontFamily: 'var(--font-body)' }}
                 >
-                  {b.aciklama}
+                  {item.aciklama}
                 </span>
-              </motion.div>
+              </div>
             )
           })}
         </div>
@@ -179,11 +146,12 @@ function SirketHikayesi() {
   return (
     <section ref={ref} className="py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+
           {/* Metin */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -24 }}
             transition={{ duration: 0.6 }}
           >
             <SectionLabel text="Şirket Profili" />
@@ -198,9 +166,9 @@ function SirketHikayesi() {
             </h2>
             <div className="space-y-4" style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}>
               <p className="leading-relaxed">
-                Yüksel Kompozit Teknolojileri A.Ş., 2010 yılında Ankara'da havacılık
+                Yüksel Kompozit Teknolojileri A.Ş., 2010 yılında Ankara&apos;da havacılık
                 ve savunma sektörüne yüksek kaliteli kompozit parça tedariki amacıyla
-                kurulmuştur. Başkent Organize Sanayi Bölgesi'ndeki modern tesisimizde,
+                kurulmuştur. Başkent Organize Sanayi Bölgesi&apos;ndeki modern tesisimizde,
                 deneyimli mühendis ve teknisyen kadromuzla üretim faaliyetlerini sürdürmekteyiz.
               </p>
               <p className="leading-relaxed">
@@ -216,75 +184,56 @@ function SirketHikayesi() {
             </div>
           </motion.div>
 
-          {/* Konum kartı */}
+          {/* Tesis Bilgileri */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="rounded-xl overflow-hidden"
-            style={{ border: '1px solid rgba(30,107,181,0.2)' }}
           >
-            {/* Fabrika iç görünümü */}
-            <div className="relative h-56 overflow-hidden">
-              <Gorsel
-                src="/images/fabrika-kareleri/hakkimizda-fabrika-genel-premium.png"
-                alt="Yüksel Kompozit Teknolojileri üretim tesisi — fabrika genel görünüm"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover ken-burns-card"
-              />
-              <div
-                className="absolute inset-0"
-                style={{ background: 'linear-gradient(to bottom, transparent 40%, rgba(10,22,40,0.85))' }}
-              />
-              <div className="absolute bottom-3 left-4 flex items-center gap-2">
-                <MapPin size={14} style={{ color: '#1E6BB5' }} />
-                <span className="text-xs" style={{ color: 'rgba(248,249,250,0.7)', fontFamily: 'var(--font-body)' }}>
-                  Başkent OSB, Temelli / Ankara
-                </span>
+            <div className="flex items-start gap-3 mb-8">
+              <MapPin size={16} style={{ color: '#D4A574', marginTop: '2px', flexShrink: 0 }} />
+              <div>
+                <p
+                  className="text-sm font-semibold mb-0.5"
+                  style={{ color: '#F8F9FA', fontFamily: 'var(--font-body)' }}
+                >
+                  Başkent Organize Sanayi Bölgesi
+                </p>
+                <p className="text-sm" style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}>
+                  Sadi Türk Bulvarı No: 5, Temelli, Ankara 06909 — Türkiye
+                </p>
               </div>
             </div>
 
-            {/* Adres detayı */}
-            <div className="p-6 space-y-3" style={{ background: 'rgba(30,58,95,0.3)' }}>
-              <div className="flex items-start gap-3">
-                <MapPin size={16} style={{ color: '#1E6BB5', marginTop: '2px', flexShrink: 0 }} />
-                <div>
-                  <p
-                    className="text-sm font-semibold mb-0.5"
-                    style={{ color: '#F8F9FA', fontFamily: 'var(--font-body)' }}
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { label: 'Toplam Alan',  val: '5.000 m²' },
+                { label: 'Üretim Alanı', val: '3.000 m²' },
+                { label: 'Temiz Oda',    val: '500 m²'   },
+                { label: 'Depo',         val: '1.500 m²' },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-xl p-6 text-center"
+                  style={{
+                    background: '#0D1B2E',
+                    border: '1px solid rgba(212,165,116,0.2)',
+                  }}
+                >
+                  <span
+                    className="block font-heading text-3xl leading-none mb-2"
+                    style={{ color: '#D4A574', fontFamily: 'var(--font-heading)', fontWeight: 900 }}
                   >
-                    Başkent Organize Sanayi Bölgesi
-                  </p>
-                  <p className="text-sm" style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}>
-                    Sadi Türk Bulvarı No: 5, Temelli, Ankara 06909 — Türkiye
-                  </p>
+                    {item.val}
+                  </span>
+                  <span
+                    className="text-[10px] uppercase tracking-wider"
+                    style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
+                  >
+                    {item.label}
+                  </span>
                 </div>
-              </div>
-              <div className="grid grid-cols-2 gap-3 pt-2"
-                style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-                {[
-                  { label: 'Toplam Alan', val: '5.000 m²' },
-                  { label: 'Üretim Alanı', val: '3.000 m²' },
-                  { label: 'Temiz Oda', val: '500 m²' },
-                  { label: 'Depo', val: '1.500 m²' },
-                ].map((item) => (
-                  <div key={item.label} className="text-center">
-                    <span
-                      className="block font-heading text-xl text-gradient-gold"
-                      style={{ fontFamily: 'var(--font-heading)' }}
-                    >
-                      {item.val}
-                    </span>
-                    <span
-                      className="text-[10px] uppercase tracking-wider"
-                      style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
-                    >
-                      {item.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -316,7 +265,7 @@ function Tarihce() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
@@ -330,63 +279,50 @@ function Tarihce() {
           </h2>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Dikey çizgi */}
-          <div
-            className="absolute left-[60px] sm:left-1/2 top-0 bottom-0 w-px hidden sm:block"
-            style={{ background: 'linear-gradient(to bottom, transparent, rgba(30,107,181,0.3) 10%, rgba(30,107,181,0.3) 90%, transparent)' }}
-          />
-
+        {/* Sol kenarlı dikey timeline */}
+        <div
+          className="relative pl-10"
+          style={{ borderLeft: '2px solid rgba(212,165,116,0.4)' }}
+        >
           <div className="space-y-10">
             {milestones.map((m, i) => (
               <motion.div
                 key={m.yil}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
+                initial={{ opacity: 0, x: -16 }}
+                animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className={`relative flex flex-col sm:flex-row gap-6 ${i % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}
+                className="relative"
               >
-                {/* Kart */}
-                <div className="sm:w-[calc(50%-40px)]">
-                  <div
-                    className="p-5 rounded-lg"
-                    style={{
-                      border: '1px solid rgba(30,107,181,0.15)',
-                      background: 'rgba(30,58,95,0.2)',
-                    }}
-                  >
-                    <span
-                      className="font-mono text-xs text-accent mb-2 block tracking-widest"
-                      style={{ color: '#1E6BB5', fontFamily: 'var(--font-mono)' }}
-                    >
-                      {m.yil}
-                    </span>
-                    <h3
-                      className="font-heading text-xl uppercase tracking-wide mb-2"
-                      style={{ color: '#F8F9FA', fontFamily: 'var(--font-heading)' }}
-                    >
-                      {m.baslik}
-                    </h3>
-                    <p
-                      className="text-sm leading-relaxed"
-                      style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
-                    >
-                      {m.aciklama}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Orta nokta */}
-                <div className="hidden sm:flex w-20 justify-center items-start pt-5 shrink-0">
-                  <div
-                    className="w-3 h-3 rounded-full border-2"
-                    style={{ background: '#0A1628', borderColor: '#1E6BB5' }}
-                  />
-                </div>
-
-                {/* Boşluk */}
-                <div className="sm:w-[calc(50%-40px)] hidden sm:block" />
+                {/* Nokta */}
+                <div
+                  className="absolute -left-[45px] top-2 w-4 h-4 rounded-full"
+                  style={{ background: '#D4A574' }}
+                />
+                {/* Yıl */}
+                <span
+                  className="block text-2xl mb-1"
+                  style={{
+                    color: '#D4A574',
+                    fontFamily: 'var(--font-mono)',
+                    fontWeight: 900,
+                  }}
+                >
+                  {m.yil}
+                </span>
+                {/* Başlık */}
+                <h3
+                  className="text-lg font-bold mb-2 uppercase tracking-wide"
+                  style={{ color: '#ffffff', fontFamily: 'var(--font-heading)' }}
+                >
+                  {m.baslik}
+                </h3>
+                {/* Açıklama */}
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
+                >
+                  {m.aciklama}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -396,48 +332,54 @@ function Tarihce() {
   )
 }
 
-/* ─── Misyon / Vizyon ─────────────────────────────────────────── */
+/* ─── Misyon & Vizyon ─────────────────────────────────────────── */
 function MisyonVizyon() {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  const kartlar = [
+    {
+      Icon: Target,
+      baslik: 'Misyonumuz',
+      borderColor: '#D4A574',
+      icerik:
+        'Havacılık ve savunma sanayiine dünya standartlarında, AS9100 sertifikalı kompozit parça üretimi sunmak; müşterilerimizin güvendiği, sektörün değer verdiği bir üretici olmak.',
+    },
+    {
+      Icon: Eye,
+      baslik: 'Vizyonumuz',
+      borderColor: 'rgba(212,165,116,0.5)',
+      icerik:
+        'Türkiye\'nin en büyük ve en güvenilir havacılık kompozit parça üreticisi olmak; uluslararası havacılık OEM\'leri ile küresel tedarik zincirinde yer alarak ihracatı artırmak.',
+    },
+  ]
 
   return (
     <section ref={ref} className="py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {[
-            {
-              Icon: Target,
-              baslik: 'Misyonumuz',
-              icerik:
-                'Havacılık ve savunma sanayiine dünya standartlarında, AS9100 sertifikalı kompozit parça üretimi sunmak; müşterilerimizin güvendiği, sektörün değer verdiği bir üretici olmak.',
-            },
-            {
-              Icon: Eye,
-              baslik: 'Vizyonumuz',
-              icerik:
-                'Türkiye\'nin en büyük ve en güvenilir havacılık kompozit parça üreticisi olmak; uluslararası havacılık OEM\'leri ile küresel tedarik zincirinde yer alarak ihracatı artırmak.',
-            },
-          ].map((item, i) => {
+          {kartlar.map((item, i) => {
             const Icon = item.Icon
             return (
               <motion.div
                 key={item.baslik}
                 initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="p-8 rounded-xl"
-                style={{ border: '1px solid rgba(30,107,181,0.2)', background: 'rgba(30,58,95,0.25)' }}
+                className="rounded-xl p-8"
+                style={{
+                  background: '#0D1B2E',
+                  borderLeft: `4px solid ${item.borderColor}`,
+                }}
               >
-                <div
-                  className="w-14 h-14 rounded-lg flex items-center justify-center mb-6"
-                  style={{ background: 'rgba(30,107,181,0.1)', border: '1px solid rgba(30,107,181,0.3)' }}
-                >
-                  <Icon size={26} style={{ color: '#1E6BB5' }} strokeWidth={1.5} />
-                </div>
+                <Icon
+                  size={26}
+                  style={{ color: '#D4A574', marginBottom: '16px' }}
+                  strokeWidth={1.5}
+                />
                 <h3
                   className="font-heading text-2xl uppercase tracking-wide mb-4"
-                  style={{ color: '#1E6BB5', fontFamily: 'var(--font-heading)' }}
+                  style={{ color: '#D4A574', fontFamily: 'var(--font-heading)' }}
                 >
                   {item.baslik}
                 </h3>
@@ -456,6 +398,60 @@ function MisyonVizyon() {
   )
 }
 
+/* ─── CTA ─────────────────────────────────────────────────────── */
+function CTABolumu() {
+  return (
+    <section
+      className="py-20"
+      style={{
+        background: 'linear-gradient(to right, #0A1628, #0D1B2E)',
+        borderTop: '1px solid rgba(212,165,116,0.15)',
+      }}
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2
+          className="font-heading text-3xl sm:text-4xl uppercase tracking-wide mb-4"
+          style={{ color: '#F8F9FA', fontFamily: 'var(--font-heading)' }}
+        >
+          Üretim Gücümüzden{' '}
+          <span className="text-gradient-gold">Yararlanın</span>
+        </h2>
+        <p
+          className="text-sm sm:text-base mb-8 max-w-xl mx-auto leading-relaxed"
+          style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
+        >
+          Havacılık ve savunma sanayii için yüksek kaliteli kompozit parça üretiminde
+          deneyimli ekibimizle projenizi birlikte değerlendirelim.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link
+            href="/iletisim"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold rounded-full transition-all duration-200 hover:scale-105"
+            style={{
+              background: '#D4A574',
+              color: '#0A1628',
+              fontFamily: 'var(--font-body)',
+              boxShadow: '0 4px 20px rgba(212,165,116,0.35)',
+            }}
+          >
+            Teklif Al
+          </Link>
+          <Link
+            href="/hizmetler"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold rounded-full transition-all duration-200 hover:bg-white/10"
+            style={{
+              border: '1px solid rgba(212,165,116,0.4)',
+              color: '#D4A574',
+              fontFamily: 'var(--font-body)',
+            }}
+          >
+            Hizmetlerimiz
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 /* ─── Sayfa ───────────────────────────────────────────────────── */
 export default function HakkimizdaSayfasi() {
@@ -464,11 +460,11 @@ export default function HakkimizdaSayfasi() {
       <Header />
       <main>
         <PageHero />
-        <FabrikaGorselBant />
-        <HizliBilgiler />
+        <IstatistikBar />
         <SirketHikayesi />
         <Tarihce />
         <MisyonVizyon />
+        <CTABolumu />
       </main>
       <Footer lang="tr" />
     </>

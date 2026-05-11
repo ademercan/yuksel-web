@@ -1,10 +1,10 @@
 'use client'
 
 import { useRef } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import { Layers, Settings, Cpu, Wrench, ArrowRight, CheckCircle2 } from 'lucide-react'
-import Gorsel from '@/components/ui/Gorsel'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 
@@ -114,12 +114,12 @@ const hizmetler = [
   },
 ]
 
-/* ─── Hizmet Kartı — Alternating Layout ──────────────────────── */
+/* ─── Hizmet Kartı ────────────────────────────────────────────── */
 function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const { Icon } = h
-  const gorselSagda = i % 2 !== 0  // 02, 04 → görsel sağda
+  const gorselSagda = i % 2 !== 0   // 02, 04 → görsel sağda
 
   return (
     <motion.div
@@ -127,42 +127,33 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
       initial={{ opacity: 0, y: 32 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
       transition={{ duration: 0.6, delay: i * 0.08 }}
-      className="rounded-xl overflow-hidden"
+      className={`overflow-hidden relative rounded-xl flex w-full min-h-[260px] ${gorselSagda ? 'flex-row-reverse' : 'flex-row'}`}
       style={{ border: '1px solid rgba(212,165,116,0.15)', background: 'rgba(30,58,95,0.2)' }}
     >
-      <div className={`flex flex-col ${gorselSagda ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
+      {/* ── Görsel wrapper ─────────────────────────────────── */}
+      <div className="relative w-[38%] shrink-0 overflow-hidden">
+        <Image
+          src={h.img}
+          alt={h.imgAlt}
+          fill
+          sizes="(max-width: 768px) 100vw, 38vw"
+          className="object-cover object-center"
+        />
 
-        {/* ── Görsel ────────────────────────────────────────── */}
-        <div className="relative lg:w-2/5 overflow-hidden" style={{ minHeight: '300px' }}>
-          <Gorsel
-            src={h.img}
-            alt={h.imgAlt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 40vw"
-            className="object-cover transition-transform duration-700 hover:scale-105"
-          />
-          {/* Gradient overlay */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: gorselSagda
-                ? 'linear-gradient(to left, transparent 40%, rgba(10,22,40,0.7))'
-                : 'linear-gradient(to right, transparent 40%, rgba(10,22,40,0.7))',
-            }}
-          />
-          {/* Numara watermark */}
-          <div className="absolute top-4 left-4">
-            <span
-              className="font-heading text-7xl font-bold select-none"
-              style={{ color: 'rgba(212,165,116,0.18)', fontFamily: 'var(--font-heading)', lineHeight: 1 }}
-            >
-              {h.numara}
-            </span>
-          </div>
+        {/* Numara watermark */}
+        <div className="absolute top-4 left-4" style={{ zIndex: 3 }}>
+          <span
+            className="font-heading text-7xl font-bold select-none"
+            style={{ color: 'rgba(212,165,116,0.18)', fontFamily: 'var(--font-heading)', lineHeight: 1 }}
+          >
+            {h.numara}
+          </span>
         </div>
+      </div>
 
-        {/* ── İçerik ────────────────────────────────────────── */}
-        <div className="lg:w-3/5 p-7 md:p-10 flex flex-col justify-center">
+      {/* ── İçerik ─────────────────────────────────────────── */}
+      <div className="flex-1 min-w-0 overflow-hidden">
+        <div className="p-7 md:p-10 flex flex-col justify-center h-full">
           {/* Başlık satırı */}
           <div className="flex items-center gap-4 mb-5">
             <div
@@ -239,11 +230,11 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
           >
             <Link
               href={h.href}
-              className="inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-200 group"
+              className="inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-200 group/link"
               style={{ color: '#D4A574', fontFamily: 'var(--font-body)' }}
             >
               Detaylı Bilgi
-              <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-1" />
+              <ArrowRight size={15} className="transition-transform duration-200 group-hover/link:translate-x-1" />
             </Link>
             <Link
               href="/iletisim"

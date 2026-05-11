@@ -1,10 +1,11 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import Gorsel from '@/components/ui/Gorsel'
-import { ArrowRight, ChevronDown, Layers, Settings, Cpu, Wrench, Mail } from 'lucide-react'
+import { ArrowRight, ChevronDown, Layers, Settings, Cpu, Wrench } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import ReferansLogoKarti from '@/components/ui/ReferansLogoKarti'
@@ -175,61 +176,6 @@ function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Butonlar */}
-        <motion.div
-          variants={fadeUp}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          {/* Altın birincil buton */}
-          <Link
-            href="/hizmetler"
-            className="group inline-flex items-center gap-2 px-8 py-4 text-base font-body font-semibold rounded-full transition-all duration-300 hover:scale-105"
-            style={{
-              background: '#D4A574',
-              color: '#0A1628',
-              fontFamily: 'var(--font-body)',
-              fontWeight: 700,
-              boxShadow: '0 8px 32px rgba(212,165,116,0.4)',
-            }}
-          >
-            Hizmetlerimizi Keşfedin
-            <ArrowRight size={18} className="transition-transform duration-200 group-hover:translate-x-1" />
-          </Link>
-
-          {/* İkincil beyaz outline buton */}
-          <Link
-            href="/iletisim"
-            className="inline-flex items-center gap-2 px-8 py-4 text-base font-body font-semibold rounded-full transition-all duration-300 hover:bg-white/10"
-            style={{
-              border: '2px solid rgba(255,255,255,0.6)',
-              color: '#ffffff',
-              fontFamily: 'var(--font-body)',
-            }}
-          >
-            Teklif Alın
-          </Link>
-        </motion.div>
-
-        {/* Sertifika rozetleri */}
-        <motion.div
-          variants={fadeIn}
-          className="mt-14 flex flex-wrap items-center justify-center gap-4"
-          style={{ opacity: 0.5 }}
-        >
-          {['AS9100 Rev.C', 'NADCAP NDT', 'NADCAP Composite', 'ISO 9001'].map((cert) => (
-            <span
-              key={cert}
-              className="text-[11px] tracking-widest uppercase rounded px-3 py-1"
-              style={{
-                color: '#6C757D',
-                border: '1px solid rgba(255,255,255,0.1)',
-                fontFamily: 'var(--font-mono)',
-              }}
-            >
-              {cert}
-            </span>
-          ))}
-        </motion.div>
       </motion.div>
 
       {/* Scroll göstergesi — tıklanınca hizmetlere scroll */}
@@ -373,52 +319,51 @@ const hizmetler = [
   {
     id: 'kompozit-parca-imalati',
     Icon: Layers,
+    numara: '01',
     baslik: 'Kompozit Parça İmalatı',
-    aciklama:
-      'CFRP ve GFRP malzemeler kullanılarak prepreg, vakum infüzyon ve autoclave kürleme yöntemleriyle havacılık sınıfı kompozit parça üretimi.',
+    aciklama: 'CFRP ve GFRP malzemelerle havacılık sınıfı kompozit parça üretimi.',
     href: '/hizmetler/kompozit-parca-imalati',
-    etiketler: ['CFRP / GFRP', 'Prepreg', 'Autoclave'],
+    etiketler: ['CFRP/GFRP', 'PREPREG', 'AUTOCLAVE'],
     img: '/images/fabrika-kareleri/hizmet-kompozit-otoklav-premium.png',
     imgAlt: 'Otoklav kürleme sistemi — kompozit parça üretimi',
   },
   {
     id: 'ana-parca-montaji',
     Icon: Settings,
+    numara: '02',
     baslik: 'Ana Parça Montajı',
-    aciklama:
-      'Havacılık standartlarında yapısal montaj ve alt-assembly üretimi. Hassas tolerans yönetimi ile seri ve prototip üretim kapasitesi.',
+    aciklama: 'Havacılık standartlarında yapısal montaj ve alt-assembly üretimi.',
     href: '/hizmetler/ana-parca-montaji',
-    etiketler: ['Yapısal Montaj', 'Alt-Assembly', 'Tolerans Yönetimi'],
-    img: '/images/fabrika-kareleri/hizmet-montaj-temiz-oda-premium.png',
-    imgAlt: 'ISO Class 8 temiz oda montaj ortamı',
+    etiketler: ['YAPISAL MONTAJ', 'ALT-ASSEMBLY', 'TOLERANS'],
+    img: '/images/fabrika-kareleri/hizmet-karbon-fiber-premium.png',
+    imgAlt: 'Karbon fiber üretim — ana parça montajı',
   },
   {
     id: 'muhendislik-tasarim',
     Icon: Cpu,
+    numara: '03',
     baslik: 'Mühendislik & Tasarım',
-    aciklama:
-      'Kompozit laminat tasarımı, FEM analiz desteği ve hızlı prototipleme. Müşteri ihtiyaçlarına özel mühendislik çözümleri.',
+    aciklama: 'FEM analiz ve kompozit laminat tasarımından prototipe kadar mühendislik desteği.',
     href: '/hizmetler/muhendislik-tasarim',
-    etiketler: ['Laminat Tasarımı', 'FEM Analiz', 'Prototipleme'],
+    etiketler: ['LAMİNAT TASARIMI', 'FEM ANALİZ', 'PROTOTİP'],
     img: '/images/fabrika-kareleri/hizmet-muhendislik-cmm-premium.png',
-    imgAlt: 'CMM koordinat ölçüm makinesi — hassas kalite kontrol',
+    imgAlt: 'CMM koordinat ölçüm makinesi — mühendislik ve tasarım',
   },
   {
     id: 'takim-aparat-imalati',
     Icon: Wrench,
+    numara: '04',
     baslik: 'Takım & Aparat İmalatı',
-    aciklama:
-      'Üretim süreçlerine özel kompozit kalıp, takım ve kontrol aparatlarının tasarımı ve imalatı. Uzun ömürlü hassas üretim araç-gereci.',
+    aciklama: 'Kompozit kalıp, montaj fikstürü ve kontrol aparatı tasarım ve imalatı.',
     href: '/hizmetler/takim-aparat-imalati',
-    etiketler: ['Kompozit Kalıp', 'Üretim Takımları', 'Kontrol Aparatları'],
+    etiketler: ['KOMPOZİT KALIP', 'ÜRETİM TAKIMLARI'],
     img: '/images/fabrika-kareleri/hizmet-cnc-tezgah-premium.png',
-    imgAlt: '5 eksenli CNC tezgah — hassas aparat imalatı',
+    imgAlt: '5 eksenli CNC tezgah — takım ve aparat imalatı',
   },
 ]
 
 function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
   const { Icon } = h
-  const [hovered, setHovered] = useState(false)
 
   return (
     <motion.div
@@ -426,116 +371,87 @@ function HizmetKarti({ h, i }: { h: typeof hizmetler[0]; i: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.5, delay: i * 0.1 }}
+      className="group relative overflow-hidden rounded-xl cursor-pointer h-[320px] md:h-[380px]"
     >
-      <Link
-        href={h.href}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className="group flex flex-col h-full rounded-lg overflow-hidden transition-all duration-300"
-        style={{
-          border: hovered ? '1px solid rgba(212,165,116,0.35)' : '1px solid rgba(255,255,255,0.07)',
-          background: hovered ? 'rgba(30,58,95,0.45)' : 'rgba(30,58,95,0.2)',
-          position: 'relative',
-        }}
-        aria-label={h.baslik}
+      {/* Resim */}
+      <Image
+        src={h.img}
+        alt={h.imgAlt}
+        fill
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+        className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+      />
+
+      {/* KATMAN 1: Normal halde alt gradient + başlık */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-20 p-5
+                   bg-gradient-to-t from-[#0A1628]/95 via-[#0A1628]/40 to-transparent
+                   transition-opacity duration-300 group-hover:opacity-0"
       >
-        {/* Görsel */}
-        <div className="relative h-40 overflow-hidden" style={{ flexShrink: 0 }}>
-          <Gorsel
-            src={h.img}
-            alt={h.imgAlt}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover ken-burns-card"
-            style={{
-              opacity: hovered ? 0.85 : 0.65,
-              transition: 'opacity 0.4s ease',
-            }}
-          />
-          {/* Güçlü alt overlay */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(to bottom, transparent 20%, rgba(10,22,40,0.70) 60%, rgba(10,22,40,0.95))',
-            }}
-          />
-        </div>
-
-        {/* Üst altın çizgi (hover'da gözükür) */}
-        <div
-          className="absolute top-0 left-0 right-0 h-0.5 transition-all duration-300"
-          style={{
-            background: 'linear-gradient(90deg, transparent, #D4A574, transparent)',
-            transform: hovered ? 'scaleX(1)' : 'scaleX(0)',
-            transformOrigin: 'left',
-          }}
-        />
-
-        <div className="p-6 md:p-7 flex flex-col h-full">
-          {/* İkon */}
-          <div
-            className="mb-5 w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300"
-            style={{
-              border: hovered ? '1px solid rgba(212,165,116,0.45)' : '1px solid rgba(212,165,116,0.2)',
-              background: hovered ? 'rgba(212,165,116,0.15)' : 'rgba(212,165,116,0.05)',
-            }}
+        <div className="flex items-center gap-2 mb-2">
+          <Icon size={15} style={{ color: '#D4A574' }} strokeWidth={1.5} />
+          <span
+            className="text-xs font-semibold tracking-widest uppercase"
+            style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}
           >
-            <Icon size={22} style={{ color: '#D4A574' }} strokeWidth={1.5} />
-          </div>
+            {h.numara}
+          </span>
+        </div>
+        <h3
+          className="text-white text-lg font-bold uppercase"
+          style={{ fontFamily: 'var(--font-heading)' }}
+        >
+          {h.baslik}
+        </h3>
+      </div>
 
-          {/* Başlık */}
+      {/* KATMAN 2: Hover overlay */}
+      <div
+        className="absolute inset-0 z-30 bg-[#0A1628]/85
+                   opacity-0 group-hover:opacity-100
+                   transition-opacity duration-[400ms]"
+      />
+
+      {/* KATMAN 3: Hover içerik */}
+      <div
+        className="absolute inset-0 z-40 p-6 flex flex-col justify-between
+                   opacity-0 group-hover:opacity-100
+                   translate-y-3 group-hover:translate-y-0
+                   transition-all duration-[400ms] delay-100"
+      >
+        {/* Üst: Numara + Başlık + Açıklama */}
+        <div>
+          <span
+            className="text-xs font-semibold tracking-widest uppercase block mb-2"
+            style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}
+          >
+            {h.numara}
+          </span>
           <h3
-            className="font-heading text-xl md:text-2xl uppercase tracking-wide mb-3 font-bold transition-colors duration-200"
-            style={{
-              color: hovered ? '#D4A574' : '#ffffff',
-              fontFamily: 'var(--font-heading)',
-            }}
+            className="text-white text-xl font-bold mb-3 uppercase"
+            style={{ fontFamily: 'var(--font-heading)' }}
           >
             {h.baslik}
           </h3>
-
-          {/* Açıklama */}
           <p
-            className="text-sm leading-relaxed mb-5 flex-grow"
-            style={{ color: '#CBD5E1', fontFamily: 'var(--font-body)' }}
+            className="text-sm leading-relaxed"
+            style={{ color: '#D1D5DB', fontFamily: 'var(--font-body)' }}
           >
             {h.aciklama}
           </p>
-
-          {/* Etiketler — altın border */}
-          <div className="flex flex-wrap gap-2 mb-5">
-            {h.etiketler.map((e) => (
-              <span
-                key={e}
-                className="text-[10px] tracking-wider uppercase rounded px-2.5 py-1"
-                style={{
-                  color: '#D4A574',
-                  border: '1px solid rgba(212,165,116,0.4)',
-                  background: 'rgba(10,22,40,0.5)',
-                  fontFamily: 'var(--font-mono)',
-                }}
-              >
-                {e}
-              </span>
-            ))}
-          </div>
-
-          {/* Link */}
-          <div
-            className="flex items-center gap-2 text-xs font-semibold transition-colors duration-200"
-            style={{
-              color: hovered ? '#D4A574' : 'rgba(212,165,116,0.5)',
-              fontFamily: 'var(--font-body)',
-            }}
-          >
-            Detaylı İncele
-            <ArrowRight
-              size={14}
-              style={{ transition: 'transform 0.2s', transform: hovered ? 'translateX(4px)' : 'none' }}
-            />
-          </div>
         </div>
-      </Link>
+
+        {/* Alt: Buton */}
+        <Link
+          href={h.href}
+          className="inline-flex items-center gap-2 text-sm font-semibold text-white
+                     border border-white/50 rounded px-4 py-2 w-fit
+                     hover:bg-white hover:text-[#0A1628] transition-colors duration-200"
+          style={{ fontFamily: 'var(--font-body)' }}
+        >
+          Detaylı İncele <span>›</span>
+        </Link>
+      </div>
     </motion.div>
   )
 }
@@ -599,11 +515,11 @@ function HizmetlerSection() {
         >
           <Link
             href="/hizmetler"
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-body font-semibold rounded-full transition-all duration-300 hover:bg-white/5"
-            style={{ border: '1px solid rgba(212,165,116,0.5)', color: '#D4A574', fontFamily: 'var(--font-body)' }}
+            className="inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-200 hover:text-white group"
+            style={{ color: '#D4A574', fontFamily: 'var(--font-body)' }}
           >
             Tüm Hizmetleri Görüntüle
-            <ArrowRight size={16} />
+            <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
           </Link>
         </motion.div>
       </div>
@@ -689,125 +605,6 @@ function ReferanslarSection() {
   )
 }
 
-/* ══════════════════════════════════════════════════════════════
-   5. CTA BANNER
-══════════════════════════════════════════════════════════════ */
-function CtaBanner() {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  return (
-    <section
-      ref={ref}
-      className="relative py-20 md:py-28 overflow-hidden"
-      aria-label="Teklif çağrısı"
-    >
-      {/* Arka plan */}
-      <div className="absolute inset-0" style={{ background: 'rgba(30,58,95,0.3)' }}>
-        <div className="absolute inset-0 bg-carbon-pattern opacity-20" />
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[600px]"
-          style={{ background: 'radial-gradient(ellipse, rgba(212,165,116,0.05) 0%, transparent 70%)' }}
-        />
-      </div>
-      <div className="divider-gold absolute top-0 left-0 right-0" />
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-3 mb-6"
-        >
-          <span className="h-px w-6" style={{ background: '#D4A574' }} />
-          <span
-            className="text-xs tracking-[0.3em] uppercase"
-            style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}
-          >
-            Birlikte Üretelim
-          </span>
-          <span className="h-px w-6" style={{ background: '#D4A574' }} />
-        </motion.div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-heading text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide mb-4 font-bold"
-          style={{ color: '#ffffff', fontFamily: 'var(--font-heading)' }}
-        >
-          Projeniz İçin{' '}
-          <span className="text-gradient-gold">Teklif Alın</span>
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-xl mx-auto mb-10 leading-relaxed"
-          style={{ color: '#E2E8F0', fontFamily: 'var(--font-body)' }}
-        >
-          Havacılık ve savunma projeleriniz için AS9100 kalite güvencesiyle
-          üretim çözümleri sunuyoruz. Teknik ekibimiz 24 saat içinde yanıt verir.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <Link
-            href="/iletisim"
-            className="group inline-flex items-center gap-2 px-8 py-4 text-base font-body font-semibold rounded-full transition-all duration-300 hover:scale-105"
-            style={{
-              background: '#D4A574',
-              color: '#0A1628',
-              fontFamily: 'var(--font-body)',
-              fontWeight: 700,
-              boxShadow: '0 8px 32px rgba(212,165,116,0.4)',
-            }}
-          >
-            <Mail size={18} />
-            Teklif Formu Doldur
-            <ArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
-          </Link>
-          <a
-            href="tel:+903126401045"
-            className="flex items-center gap-2 text-sm transition-colors duration-200"
-            style={{ color: 'rgba(248,249,250,0.65)', fontFamily: 'var(--font-body)' }}
-          >
-            ya da arayın:{' '}
-            <span style={{ color: '#D4A574', fontFamily: 'var(--font-mono)' }}>
-              +90 (312) 640 10 45 - 46
-            </span>
-          </a>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-12 pt-8 flex flex-wrap items-center justify-center gap-4 text-xs tracking-widest uppercase"
-          style={{
-            borderTop: '1px solid rgba(255,255,255,0.05)',
-            color: 'rgba(108,117,125,0.4)',
-            fontFamily: 'var(--font-mono)',
-          }}
-        >
-          <span>AS9100 Rev.C</span>
-          <span style={{ opacity: 0.3 }}>·</span>
-          <span>NADCAP NDT</span>
-          <span style={{ opacity: 0.3 }}>·</span>
-          <span>NADCAP Composite</span>
-          <span style={{ opacity: 0.3 }}>·</span>
-          <span>ISO 9001:2008</span>
-        </motion.div>
-      </div>
-      <div className="divider-gold absolute bottom-0 left-0 right-0" />
-    </section>
-  )
-}
 
 /* ══════════════════════════════════════════════════════════════
    SAYFA
@@ -821,7 +618,6 @@ export default function AnaSayfa() {
         <IstatistikBar />
         <HizmetlerSection />
         <ReferanslarSection />
-        <CtaBanner />
       </main>
       <Footer lang="tr" />
     </>
